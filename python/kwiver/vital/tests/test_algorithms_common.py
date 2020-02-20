@@ -44,8 +44,7 @@ def _dummy_algorithm_cfg():
   return generate_dummy_config(threshold=0.3)
 
 
-class TestVitalAlgorithmsBasic(object):
-
+class TestVitalAlgorithmsCommon(object):
   def get_algo_list(self):
     modules.load_known_modules()
     algo_list = []

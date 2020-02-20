@@ -47,39 +47,6 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
     modules.load_known_modules()
     self.wtds = WriteTrackDescriptorSet.create("SimpleWriteTrackDescriptorSet")
 
-
-# Display all the registered write track descriptor sets
-  def test_registered_names(self):
-    modules.load_known_modules()
-    registered_wtds_names = WriteTrackDescriptorSet.registered_names()
-    print("All write track descriptor sets")
-    for name in registered_wtds_names:
-        print(" " + name)
-
-
-  # Test create function
-  # For an invalid value it raises RuntimeError
-  @nose.tools.raises(RuntimeError)
-  def test_bad_create(self):
-    # Should fail to create an algorithm without a factory
-    WriteTrackDescriptorSet.create("NonExistantAlgorithm")
-
-  # For a registered write track descriptor set it returns an instance of the implementation
-  def test_create(self):
-    modules.load_known_modules()
-    registered_wtds_name = WriteTrackDescriptorSet.registered_names()[0]
-    nose.tools.ok_(registered_wtds_name is not None,
-                    "No instance returned from the factory method")
-
-
-  # Test write_set function with our simple class instance
-  # When no argument is passed, it raises TypeError
-  @nose.tools.raises(TypeError)
-  @nose.tools.with_setup(setup = setUp)
-  def test_empty_write_set(self):
-    self.wtds.write_set()
-
-
   @nose.tools.raises(TypeError)
   @nose.tools.with_setup(setUp)
   def test_empty_open(self):

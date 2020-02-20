@@ -46,28 +46,6 @@ def _dummy_detector_cfg():
     return generate_dummy_config(threshold=0.4)
 
 class TestVitalImageObjectDetector(object):
-    # Display all the registered image detectors
-    def test_registered_names(self):
-        modules.load_known_modules()
-        registered_detectors = ImageObjectDetector.registered_names()
-        print("All registered image object detectors")
-        for detectors in registered_detectors:
-            print(" " + detectors)
-
-    # Test create function of the detector
-    # For an invalid value it raises RuntimeError
-    @nose.tools.raises(RuntimeError)
-    def test_bad_create(self):
-        # Should fail to create an algorithm without a factory
-        ImageObjectDetector.create("")
-
-    # For a registered object detector it returns an instance of the implementation
-    def test_create(self):
-        modules.load_known_modules()
-        registered_detector = ImageObjectDetector.registered_names()[0]
-        nose.tools.ok_(registered_detector is not None,
-                        "No instance returned from the factory method")
-
     # Test detect function with an instance of example_detector
     # When an image container is not passed it raises TypeError
     @nose.tools.raises(TypeError)
@@ -93,33 +71,3 @@ class TestVitalImageObjectDetector(object):
         nose.tools.ok_(detections is not None,
                        "Unexpected empty detections" )
         nose.tools.assert_equal(len(detections), 0)
-
-    # Test configuration
-    def test_config(self):
-        modules.load_known_modules()
-        detector = ImageObjectDetector.create("SimpleImageObjectDetector")
-        # Verify that 6 config values are present in example_detector
-        nose.tools.assert_equal(len(detector.get_configuration()), 1)
-        test_cfg = _dummy_detector_cfg()
-        # Verify that the detector has different configuration before setting to test
-        nose.tools.assert_equal(detector.check_configuration(test_cfg), False)
-        detector.set_configuration(test_cfg)
-        # Verify that the config value is being set properly
-        nose.tools.assert_equal(detector.check_configuration(test_cfg), True)
-
-
-    # Test nested configuration
-    def test_nested_config(self):
-        modules.load_known_modules()
-        detector = ImageObjectDetector.create("SimpleImageObjectDetector")
-        nested_cfg = config.empty_config()
-        ImageObjectDetector.get_nested_algo_configuration( "detector",
-                                                            nested_cfg,
-                                                            detector )
-        # Verify that test cfg is set to configuration inside detector
-        # nested configuration uses the name of a detector as an additional
-        # configuration key thus it is checked against 2 rather than 1
-        nose.tools.assert_equal(len(nested_cfg), 2)
-        nose.tools.assert_equal(
-                ImageObjectDetector.check_nested_algo_configuration("detector",
-                                                            nested_cfg), True)

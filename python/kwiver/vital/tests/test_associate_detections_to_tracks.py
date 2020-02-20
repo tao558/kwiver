@@ -48,29 +48,6 @@ def _dummy_algorithm_cfg():
     return generate_dummy_config(threshold=0.3)
 
 class TestVitalAssociateDetectionsToTracks(object):
-    # Display all the registered algorithm
-    def test_registered_names(self):
-        modules.load_known_modules()
-        registered_algorithms = AssociateDetectionsToTracks.registered_names()
-        print("All registered algorithms")
-        for algorithm in registered_algorithms:
-            print(" " + algorithm)
-
-    # Test create function of the detector
-    # For an invalid value it raises RuntimeError
-    @nose.tools.raises(RuntimeError)
-    def test_bad_create(self):
-        # Should fail to create an algorithm without a factory
-        AssociateDetectionsToTracks.create("")
-
-    # Test create with a valid implementation
-    def test_create(self):
-        modules.load_known_modules()
-        algorithm = AssociateDetectionsToTracks.create(
-                                    "SimpleAssociateDetectionsToTracks")
-        nose.tools.ok_(algorithm is not None,
-                        "Unable to create the algorithm")
-
     # Test associate function with an instance of example_algorithm
     @nose.tools.raises(TypeError)
     def test_empty_associate(self):
@@ -96,36 +73,3 @@ class TestVitalAssociateDetectionsToTracks(object):
                                            cost_matrix, op_tracks,
                                            unused_detections),
                        "Unexpected empty detections")
-
-    # Test configuration
-    def test_config(self):
-        modules.load_known_modules()
-        algorithm = AssociateDetectionsToTracks.create(
-                                    "SimpleAssociateDetectionsToTracks")
-        # Verify that 1 config value are present in test algorithm
-        nose.tools.assert_equal(len(algorithm.get_configuration()), 1)
-        test_cfg = _dummy_algorithm_cfg()
-        # Verify that the algorithm has different configuration before setting to test
-        nose.tools.assert_equal(algorithm.check_configuration(test_cfg), False)
-        algorithm.set_configuration(test_cfg)
-        # Verify that the config value is being set properly
-        nose.tools.assert_equal(algorithm.check_configuration(test_cfg), True)
-
-
-    # Test nested configuration
-    def test_nested_config(self):
-        modules.load_known_modules()
-        algorithm = AssociateDetectionsToTracks.create(
-                                    "SimpleAssociateDetectionsToTracks")
-        nested_cfg = config.empty_config()
-        AssociateDetectionsToTracks.get_nested_algo_configuration(
-                                                            "algorithm",
-                                                            nested_cfg,
-                                                            algorithm )
-        # Verify that test cfg is set to configuration inside algorithm
-        # nested configuration uses the name of an algorithm as an additional
-        # configuration key thus it is checked against 2 rather than 1
-        nose.tools.assert_equal(len(nested_cfg), 2)
-        nose.tools.assert_equal(
-                AssociateDetectionsToTracks.check_nested_algo_configuration(
-                                        "algorithm", nested_cfg), True)

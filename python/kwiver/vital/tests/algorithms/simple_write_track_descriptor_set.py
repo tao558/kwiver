@@ -53,18 +53,16 @@ class SimpleWriteTrackDescriptorSet(CommonConfigurationMixin,
     def open(self, other_file_name):
         self.buff_is_open = True
 
-    # Just writes the track uids
+    # Just calls the first items method()
     def write_set(self, set):
-        for desc in set:
-            self.buff += desc.get_uid().value()
-            self.buff += self.delim
+        set[0].method()
 
 
 def __vital_algorithm_register__():                                            
-    from kwiver.vital.algo import algorithm_factory                            
-     # Register Algorithm                                                        
-    implementation_name  = "SimpleWriteTrackDescriptorSet"                  
-    if algorithm_factory.has_algorithm_impl_name(SimpleWriteTrackDescriptorSet.static_type_name(), implementation_name):                              
+    from kwiver.vital.algo import algorithm_factory
+     # Register Algorithm 
+    implementation_name  = "SimpleWriteTrackDescriptorSet"
+    if algorithm_factory.has_algorithm_impl_name(SimpleWriteTrackDescriptorSet.static_type_name(), implementation_name):
         return                                                                  
         
     algorithm_factory.add_algorithm( implementation_name, "test simple write track descriptor set", SimpleWriteTrackDescriptorSet )            

@@ -34,11 +34,11 @@ from kwiver.vital.tests.helpers import CommonConfigurationMixin
 
 class SimpleWriteTrackDescriptorSet(CommonConfigurationMixin,
                                     WriteTrackDescriptorSet):
-    """                                                                        
+    """
     Implementation of a basic WriteTrackDescriptorSet. Uses
     buff to simulate writing to a file, and buff_is_open to simulate
-    opening and closing a file.             
-    """  
+    opening and closing a file.
+    """
 
     def __init__(self):
         WriteTrackDescriptorSet.__init__(self)
@@ -55,15 +55,16 @@ class SimpleWriteTrackDescriptorSet(CommonConfigurationMixin,
 
     # Just calls the first items method()
     def write_set(self, set):
-        set[0].method()
+        if len(set) > 0:
+            set[0].method()
 
 
-def __vital_algorithm_register__():                                            
+def __vital_algorithm_register__():
     from kwiver.vital.algo import algorithm_factory
-     # Register Algorithm 
+     # Register Algorithm
     implementation_name  = "SimpleWriteTrackDescriptorSet"
     if algorithm_factory.has_algorithm_impl_name(SimpleWriteTrackDescriptorSet.static_type_name(), implementation_name):
-        return                                                                  
-        
-    algorithm_factory.add_algorithm( implementation_name, "test simple write track descriptor set", SimpleWriteTrackDescriptorSet )            
-    algorithm_factory.mark_algorithm_as_loaded( implementation_name )   
+        return
+
+    algorithm_factory.add_algorithm( implementation_name, "test simple write track descriptor set", SimpleWriteTrackDescriptorSet )
+    algorithm_factory.mark_algorithm_as_loaded( implementation_name )

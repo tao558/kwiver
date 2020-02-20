@@ -72,7 +72,7 @@ class write_object_track_set_trampoline :
   public:
     using algorithm_def_wots_trampoline< write_object_track_set_base>::
               algorithm_def_wots_trampoline;
-    
+
 
 
     void open( std::string const& filename ) override

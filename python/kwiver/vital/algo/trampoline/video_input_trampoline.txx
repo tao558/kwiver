@@ -81,10 +81,10 @@ class video_input_trampoline :
     open( std::string video_name ) override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        void, 
-        kwiver::vital::algo::video_input, 
-        open, 
-        video_name 
+        void,
+        kwiver::vital::algo::video_input,
+        open,
+        video_name
       );
     }
 
@@ -92,9 +92,9 @@ class video_input_trampoline :
     close() override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        void, 
-        kwiver::vital::algo::video_input, 
-        close, 
+        void,
+        kwiver::vital::algo::video_input,
+        close,
       );
     }
 
@@ -102,9 +102,9 @@ class video_input_trampoline :
     end_of_video() const override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        bool, 
-        kwiver::vital::algo::video_input, 
-        end_of_video, 
+        bool,
+        kwiver::vital::algo::video_input,
+        end_of_video,
       );
     }
 
@@ -112,9 +112,9 @@ class video_input_trampoline :
     good() const override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        bool, 
-        kwiver::vital::algo::video_input, 
-        good, 
+        bool,
+        kwiver::vital::algo::video_input,
+        good,
       );
     }
 
@@ -122,9 +122,9 @@ class video_input_trampoline :
     seekable() const override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        bool, 
-        kwiver::vital::algo::video_input, 
-        seekable, 
+        bool,
+        kwiver::vital::algo::video_input,
+        seekable,
       );
     }
 
@@ -132,9 +132,9 @@ class video_input_trampoline :
     num_frames() const override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        size_t, 
-        kwiver::vital::algo::video_input, 
-        num_frames, 
+        size_t,
+        kwiver::vital::algo::video_input,
+        num_frames,
       );
     }
 
@@ -143,10 +143,10 @@ class video_input_trampoline :
                 uint32_t timeout = 0) override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        bool, 
-        kwiver::vital::algo::video_input, 
+        bool,
+        kwiver::vital::algo::video_input,
         next_frame,
-        ts, 		
+        ts,
         timeout
       );
     }
@@ -157,11 +157,11 @@ class video_input_trampoline :
                uint32_t timeout = 0) override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        bool, 
-        kwiver::vital::algo::video_input, 
+        bool,
+        kwiver::vital::algo::video_input,
         seek_frame,
         ts,
-        frame_number,		
+        frame_number,
         timeout
       );
     }
@@ -170,9 +170,9 @@ class video_input_trampoline :
     frame_timestamp() const override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        kwiver::vital::timestamp, 
-        kwiver::vital::algo::video_input, 
-        frame_timestamp, 
+        kwiver::vital::timestamp,
+        kwiver::vital::algo::video_input,
+        frame_timestamp,
       );
     }
 
@@ -180,8 +180,8 @@ class video_input_trampoline :
     frame_image() override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        kwiver::vital::image_container_sptr, 
-        kwiver::vital::algo::video_input, 
+        kwiver::vital::image_container_sptr,
+        kwiver::vital::algo::video_input,
         frame_image,
       );
     }
@@ -190,8 +190,8 @@ class video_input_trampoline :
     frame_metadata() override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        kwiver::vital::metadata_vector, 
-        kwiver::vital::algo::video_input, 
+        kwiver::vital::metadata_vector,
+        kwiver::vital::algo::video_input,
         frame_metadata,
       );
     }
@@ -200,8 +200,8 @@ class video_input_trampoline :
     metadata_map() override
     {
       VITAL_PYBIND11_OVERLOAD_PURE(
-        kwiver::vital::metadata_map_sptr, 
-        kwiver::vital::algo::video_input, 
+        kwiver::vital::metadata_map_sptr,
+        kwiver::vital::algo::video_input,
         metadata_map,
       );
     }
@@ -210,8 +210,8 @@ class video_input_trampoline :
     frame_rate() override
     {
       VITAL_PYBIND11_OVERLOAD(
-        double, 
-        kwiver::vital::algo::video_input, 
+        double,
+        kwiver::vital::algo::video_input,
         frame_rate,
       );
     }

@@ -4,6 +4,7 @@
 
 # Define modules with tests in them
 set(__testable_modnames
+  test_algorithms_common
   test_algorithm_factory
   test_associate_detections_to_tracks
   test_bundle_adjust

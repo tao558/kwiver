@@ -80,7 +80,6 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
     self.wtds.write_set()
 
 
-
   @nose.tools.raises(TypeError)
   @nose.tools.with_setup(setUp)
   def test_empty_open(self):
@@ -101,37 +100,9 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
     self.wtds.close()
     nose.tools.ok_(not self.wtds.buff_is_open, "buffer open after close() call")
 
-
   @nose.tools.with_setup(setup = setUp)
   def test_write_set(self):
     self.wtds.open("dummy_wtds_filename.txt")
     track_descriptor_mock = Mock()
     self.wtds.write_set([track_descriptor_mock])
     track_descriptor_mock.method.assert_called_once_with()
-
-
-
-  @nose.tools.with_setup(setUp)
-  def test_config(self):
-    # Verify that 1 config value is present
-    nose.tools.ok_(len(self.wtds.get_configuration()) ==  1)
-    test_cfg = generate_dummy_config(threshold=0.4)
-    # Verify that the wtds has different configuration before setting to test
-    nose.tools.ok_(not self.wtds.check_configuration(test_cfg))
-    self.wtds.set_configuration(test_cfg)
-    # Verify that the config value is being set properly
-    nose.tools.ok_(self.wtds.check_configuration(test_cfg))
-
-
-  @nose.tools.with_setup(setUp)
-  def test_nested_config(self):
-    nested_cfg = config.empty_config()
-    WriteTrackDescriptorSet.get_nested_algo_configuration( "algorithm",
-                                                        nested_cfg,
-                                                        self.wtds )
-
-    nose.tools.ok_(WriteTrackDescriptorSet.check_nested_algo_configuration(
-                                                        "algorithm",
-                                                        nested_cfg))
-
-

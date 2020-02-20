@@ -237,7 +237,7 @@ class CommonConfigurationMixin(object):
     Note: This mixin is intended only for simple algorithms that were written
           for testing kwiver.vital.algo bindings
     """
-    threshold = 0.1
+    threshold = 0.0
 
     def __init__(self):
         """

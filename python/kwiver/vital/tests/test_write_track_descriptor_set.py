@@ -84,7 +84,6 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
   def test_empty_write_set(self):
     self.wtds.write_set()
 
-  
 
   @nose.tools.raises(TypeError)
   @nose.tools.with_setup(setUp)
@@ -106,14 +105,13 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
     self.wtds.close()
     nose.tools.ok_(not self.wtds.buff_is_open, "buffer open after close() call")
 
- 
   @nose.tools.with_setup(setup = setUp)
   def test_write_set(self):
     self.wtds.open("dummy_wtds_filename.txt")
     track_descriptor_mock = Mock()
-    self.wtds.write_set([track_descriptor_mock]) 
+    self.wtds.write_set([track_descriptor_mock])
     track_descriptor_mock.method.assert_called_once()
-    
+
 
 
   @nose.tools.with_setup(setUp)

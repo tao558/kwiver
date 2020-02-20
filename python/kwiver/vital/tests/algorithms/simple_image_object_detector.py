@@ -73,49 +73,21 @@ class SimpleImageObjectDetector(ImageObjectDetector):
     """
     def __init__(self):
         ImageObjectDetector.__init__(self)
-        self.m_center_x = 200.0
-        self.m_center_y = 200.0
-        self.m_height = 200.0
-        self.m_width = 100.0
-        self.m_dx = 0
-        self.m_dy = 0
-        self.frame_ct = 0
+        self.threshold = 0.0
 
     def get_configuration(self):
         # Inherit from the base class
         cfg = super(ImageObjectDetector, self).get_configuration()
-        cfg.set_value( "center_x", str(self.m_center_x) )
-        cfg.set_value( "center_y", str(self.m_center_y) )
-        cfg.set_value( "height", str(self.m_height) )
-        cfg.set_value( "width", str(self.m_width) )
-        cfg.set_value( "dx", str(self.m_dx) )
-        cfg.set_value( "dy", str(self.m_dy) )
+        cfg.set_value( "threshold", str(self.threshold) )
         return cfg
 
     def set_configuration( self, cfg_in ):
         cfg = self.get_configuration()
         cfg.merge_config(cfg_in)
-        self.m_center_x     = float(cfg.get_value( "center_x" ))
-        self.m_center_y     = float(cfg.get_value( "center_y" ))
-        self.m_height       = float(cfg.get_value( "height" ))
-        self.m_width        = float(cfg.get_value( "width" ))
-        self.m_dx           = int(float(cfg.get_value( "dx" )))
-        self.m_dy           = int(float(cfg.get_value( "dy" )))
+        self.threshold = float(cfg.get_value("threshold"))
 
-    def check_configuration( self, cfg):
-        if cfg.has_value("center_x") and not float(cfg.get_value( "center_x" ))==self.m_center_x:
-            return False
-        if cfg.has_value("center_y") and not float(cfg.get_value( "center_y" ))==self.m_center_y:
-            return False
-        if cfg.has_value("height") and not float(cfg.get_value( "height" ))==self.m_height:
-            return False
-        if cfg.has_value("width") and not float(cfg.get_value( "width" ))==self.m_width:
-            return False
-        if cfg.has_value("dx") and not int(float(cfg.get_value( "dx" )))==self.m_dx:
-            return False
-        if cfg.has_value("dy") and not int(float(cfg.get_value( "dy" )))==self.m_dy:
-            return False
-        return True
+    def check_configuration( self, cfg ):
+        return (not cfg.has_value("threshold") or float(cfg.get_value("threshold"))==self.threshold)
 
     def detect(self, image_data):
         dot = DetectedObjectSet([DetectedObject(

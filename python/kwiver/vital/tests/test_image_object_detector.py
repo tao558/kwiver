@@ -43,12 +43,7 @@ from kwiver.vital.tests.helpers import generate_dummy_config
 from kwiver.vital.config import config
 
 def _dummy_detector_cfg():
-    return generate_dummy_config(center_x=3,
-                                 center_y=5,
-                                 dx=0.3,
-                                 dy=0.2,
-                                 height=10,
-                                 width=15)
+    return generate_dummy_config(threshold = 0.3)
 
 class TestVitalImageObjectDetector(object):
     # Display all the registered image detectors
@@ -87,7 +82,7 @@ class TestVitalImageObjectDetector(object):
         detector = ImageObjectDetector.create("SimpleImageObjectDetector")
         detector.detect("param_of_wrong_type")
     '''
-    
+
     # For an image container it returns a detected object set of size 1
     def test_detect(self):
         modules.load_known_modules()

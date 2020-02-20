@@ -38,12 +38,7 @@ from kwiver.vital.modules import modules
 from kwiver.vital.config import config
 from unittest import TestCase
 from unittest.mock import Mock
-
-
-def _dummy_descriptor_cfg():
-  test_cfg = config.empty_config()
-  test_cfg.set_value("delim", " ")
-  return test_cfg
+from kwiver.vital.tests.helpers import generate_dummy_config
 
 
 class TestVitalWriteTrackDescriptorSet(TestCase):
@@ -51,7 +46,6 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
   def setUp(self):
     modules.load_known_modules()
     self.descriptor_set = WriteTrackDescriptorSet.create("SimpleWriteTrackDescriptorSet")
-
 
 
 # Display all the registered write track descriptor sets
@@ -85,7 +79,7 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
   def test_empty_write_set(self):
     self.descriptor_set.write_set()
 
-  
+
 
   @nose.tools.raises(TypeError)
   @nose.tools.with_setup(setUp)
@@ -114,7 +108,7 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
     track_descriptor_mock = Mock()
     # This is so we can call mock.get_uid().value()
     track_descriptor_mock.get_uid.return_value.value.return_value = "5"
-    self.descriptor_set.write_set([track_descriptor_mock]) 
+    self.descriptor_set.write_set([track_descriptor_mock])
     nose.tools.ok_(self.descriptor_set.buff == "5_", "content written doesn't match expected")
     
 
@@ -124,7 +118,7 @@ class TestVitalWriteTrackDescriptorSet(TestCase):
   def test_config(self):
     # Verify that 1 config value is present
     nose.tools.ok_(len(self.descriptor_set.get_configuration()) ==  1)
-    test_cfg = _dummy_descriptor_cfg()
+    test_cfg = generate_dummy_config(threshold=0.4)
     # Verify that the detector has different configuration before setting to test
     nose.tools.ok_(not self.descriptor_set.check_configuration(test_cfg))
     self.descriptor_set.set_configuration(test_cfg)

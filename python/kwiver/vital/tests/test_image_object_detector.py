@@ -43,12 +43,7 @@ from kwiver.vital.tests.helpers import generate_dummy_config
 from kwiver.vital.config import config
 
 def _dummy_detector_cfg():
-    return generate_dummy_config(center_x=3,
-                                 center_y=5,
-                                 dx=0.3,
-                                 dy=0.2,
-                                 height=10,
-                                 width=15)
+    return generate_dummy_config(threshold=0.4)
 
 class TestVitalImageObjectDetector(object):
     # Display all the registered image detectors
@@ -87,7 +82,7 @@ class TestVitalImageObjectDetector(object):
         detector = ImageObjectDetector.create("SimpleImageObjectDetector")
         detector.detect("param_of_wrong_type")
     '''
-    
+
     # For an image container it returns a detected object set of size 1
     def test_detect(self):
         modules.load_known_modules()
@@ -97,14 +92,14 @@ class TestVitalImageObjectDetector(object):
         detections = detector.detect(image_container)
         nose.tools.ok_(detections is not None,
                        "Unexpected empty detections" )
-        nose.tools.assert_equal(len(detections), 1)
+        nose.tools.assert_equal(len(detections), 0)
 
     # Test configuration
     def test_config(self):
         modules.load_known_modules()
         detector = ImageObjectDetector.create("SimpleImageObjectDetector")
         # Verify that 6 config values are present in example_detector
-        nose.tools.assert_equal(len(detector.get_configuration()), 6)
+        nose.tools.assert_equal(len(detector.get_configuration()), 1)
         test_cfg = _dummy_detector_cfg()
         # Verify that the detector has different configuration before setting to test
         nose.tools.assert_equal(detector.check_configuration(test_cfg), False)
@@ -123,8 +118,8 @@ class TestVitalImageObjectDetector(object):
                                                             detector )
         # Verify that test cfg is set to configuration inside detector
         # nested configuration uses the name of a detector as an additional
-        # configuration key thus it is checked against 7 rather than 6
-        nose.tools.assert_equal(len(nested_cfg), 7)
+        # configuration key thus it is checked against 2 rather than 1
+        nose.tools.assert_equal(len(nested_cfg), 2)
         nose.tools.assert_equal(
                 ImageObjectDetector.check_nested_algo_configuration("detector",
                                                             nested_cfg), True)

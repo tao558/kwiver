@@ -29,38 +29,12 @@
 from __future__ import print_function
 
 from kwiver.vital.algo import AssociateDetectionsToTracks
-from kwiver.vital.types import DetectedObjectSet, ObjectTrackSet, Timestamp
-from kwiver.vital.types import ImageContainer
+from kwiver.vital.tests.helpers import CommonConfigurationMixin
 
-import numpy as np
-
-class SimpleAssociateDetectionsToTracks(AssociateDetectionsToTracks):
-    """
-    Implementation of AssociateDetectionsToTrack to test it
-
-    Examples:
-    """
+class SimpleAssociateDetectionsToTracks(CommonConfigurationMixin,
+                                        AssociateDetectionsToTracks):
     def __init__(self):
         AssociateDetectionsToTracks.__init__(self)
-        self.threshold = 0.0
-
-    def get_configuration(self):
-        # Inherit from the base class
-        cfg = super(AssociateDetectionsToTracks, self).get_configuration()
-        cfg.set_value( "threshold", str(self.threshold) )
-        return cfg
-
-    def set_configuration( self, cfg_in ):
-        cfg = self.get_configuration()
-        cfg.merge_config(cfg_in)
-        self.threshold     = float(cfg.get_value("threshold"))
-
-    def check_configuration( self, cfg):
-        if cfg.has_value("threshold") and \
-           not float(cfg.get_value("threshold"))==self.threshold:
-            return False
-        else:
-            return True
 
     def associate(self, timestamp, image, tracks, detections, cost_matrix,
                   output, unused):

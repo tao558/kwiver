@@ -10,6 +10,7 @@ set(__testable_modnames
   test_bundle_adjust
   test_camera
   test_camera_intrinsics
+  test_close_loops
   test_config
   test_camera_map
   test_color

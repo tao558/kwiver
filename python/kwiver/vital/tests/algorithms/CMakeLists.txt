@@ -3,6 +3,7 @@ set(__test_algorithms
   simple_bundle_adjust
   simple_close_loops
   simple_compute_association_matrix
+  simple_compute_depth
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

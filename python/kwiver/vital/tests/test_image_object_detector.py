@@ -42,8 +42,10 @@ from kwiver.vital.modules import modules
 from kwiver.vital.tests.helpers import generate_dummy_config
 from kwiver.vital.config import config
 
+
 def _dummy_detector_cfg():
     return generate_dummy_config(threshold=0.4)
+
 
 class TestVitalImageObjectDetector(object):
     # Test detect function with an instance of example_detector
@@ -54,13 +56,6 @@ class TestVitalImageObjectDetector(object):
         detector = ImageObjectDetector.create("SimpleImageObjectDetector")
         detector.detect()
 
-    '''#TODO: why doesn't this work?
-    def test_detect_wrong_type(self):
-        modules.load_known_modules()
-        detector = ImageObjectDetector.create("SimpleImageObjectDetector")
-        detector.detect("param_of_wrong_type")
-    '''
-
     # For an image container it returns a detected object set of size 1
     def test_detect(self):
         modules.load_known_modules()
@@ -68,6 +63,5 @@ class TestVitalImageObjectDetector(object):
         image = Image()
         image_container = ImageContainer(image)
         detections = detector.detect(image_container)
-        nose.tools.ok_(detections is not None,
-                       "Unexpected empty detections" )
+        nose.tools.ok_(detections is not None, "Unexpected empty detections")
         nose.tools.assert_equal(len(detections), 0)

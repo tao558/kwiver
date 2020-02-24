@@ -32,6 +32,7 @@ from kwiver.vital.algo import ImageObjectDetector
 from kwiver.vital.types import DetectedObjectSet
 from kwiver.vital.tests.helpers import CommonConfigurationMixin
 
+
 class SimpleImageObjectDetector(CommonConfigurationMixin, ImageObjectDetector):
     """
     Implementation of ImageObjectDetector to test it
@@ -63,6 +64,7 @@ class SimpleImageObjectDetector(CommonConfigurationMixin, ImageObjectDetector):
         >>> image_detector.check_configuration(tc)
         True
     """
+
     def __init__(self):
         super(SimpleImageObjectDetector, self).__init__()
 
@@ -70,15 +72,19 @@ class SimpleImageObjectDetector(CommonConfigurationMixin, ImageObjectDetector):
         dot = DetectedObjectSet()
         return dot
 
+
 def __vital_algorithm_register__():
     from kwiver.vital.algo import algorithm_factory
+
     # Register Algorithm
-    implementation_name  = "SimpleImageObjectDetector"
+    implementation_name = "SimpleImageObjectDetector"
     if algorithm_factory.has_algorithm_impl_name(
-                                SimpleImageObjectDetector.static_type_name(),
-                                implementation_name):
+        SimpleImageObjectDetector.static_type_name(), implementation_name
+    ):
         return
-    algorithm_factory.add_algorithm( implementation_name,
-                                "Test kwiver.vital.algo.ImageObjectDetector",
-                                 SimpleImageObjectDetector )
-    algorithm_factory.mark_algorithm_as_loaded( implementation_name )
+    algorithm_factory.add_algorithm(
+        implementation_name,
+        "Test kwiver.vital.algo.ImageObjectDetector",
+        SimpleImageObjectDetector,
+    )
+    algorithm_factory.mark_algorithm_as_loaded(implementation_name)

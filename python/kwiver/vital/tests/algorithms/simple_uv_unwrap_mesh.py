@@ -24,33 +24,27 @@
 # DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
 # SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-from __future__ import print_function
-
-from kwiver.vital.algo import AssociateDetectionsToTracks
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+from kwiver.vital.algo import UVUnwrapMesh
 from kwiver.vital.tests.helpers import CommonConfigurationMixin
 
 
-class SimpleAssociateDetectionsToTracks(
-    CommonConfigurationMixin, AssociateDetectionsToTracks
-):
+class SimpleUVUnwrapMesh(CommonConfigurationMixin, UVUnwrapMesh):
     def __init__(self):
-        AssociateDetectionsToTracks.__init__(self)
+        UVUnwrapMesh.__init__(self)
 
 
 def __vital_algorithm_register__():
     from kwiver.vital.algo import algorithm_factory
 
     # Register Algorithm
-    implementation_name = "SimpleAssociateDetectionsToTracks"
+    implementation_name = "SimpleUVUnwrapMesh"
     if algorithm_factory.has_algorithm_impl_name(
-        SimpleAssociateDetectionsToTracks.static_type_name(), implementation_name
+        SimpleUVUnwrapMesh.static_type_name(), implementation_name
     ):
         return
+
     algorithm_factory.add_algorithm(
-        implementation_name,
-        "test simple associate detections to tracks",
-        SimpleAssociateDetectionsToTracks,
+        implementation_name, "test simple uv unwrap mesh", SimpleUVUnwrapMesh,
     )
     algorithm_factory.mark_algorithm_as_loaded(implementation_name)

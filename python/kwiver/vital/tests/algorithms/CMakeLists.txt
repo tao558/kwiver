@@ -1,6 +1,7 @@
 set(__test_algorithms
   simple_associate_detections_to_tracks
   simple_bundle_adjust
+  simple_close_loops
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

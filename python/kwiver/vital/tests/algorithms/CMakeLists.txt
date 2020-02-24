@@ -17,6 +17,7 @@ set(__test_algorithms
   simple_draw_tracks
   simple_estimate_canonical_transform
   simple_estimate_fundamental_matrix
+  simple_estimate_homography
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

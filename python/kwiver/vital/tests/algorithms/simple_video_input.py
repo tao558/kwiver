@@ -27,49 +27,29 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-Tests for write track descriptor set interface class
 """
-import nose.tools
-import os
-
-from kwiver.vital.algo import WriteTrackDescriptorSet
-from kwiver.vital.modules import modules
-from kwiver.vital.config import config
-from unittest import TestCase
-from unittest.mock import Mock
-from kwiver.vital.tests.helpers import generate_dummy_config
 
 
-class TestVitalWriteTrackDescriptorSet(TestCase):
-
-  def setUp(self):
-    modules.load_known_modules()
-    self.wtds = WriteTrackDescriptorSet.create("SimpleWriteTrackDescriptorSet")
-
-  @nose.tools.raises(TypeError)
-  @nose.tools.with_setup(setUp)
-  def test_empty_open(self):
-    self.wtds.open()
+from kwiver.vital.algo import VideoInput
+from kwiver.vital.tests.helpers import CommonConfigurationMixin
 
 
-  @nose.tools.with_setup(setup = setUp)
-  def test_open(self):
-    nose.tools.ok_(not self.wtds.buff_is_open, "buffer initialized as open")
-    self.wtds.open("dummy_wtds_filename.txt")
-    nose.tools.ok_(self.wtds.buff_is_open, "buffer closed after open() call")
+class SimpleVideoInput(CommonConfigurationMixin, VideoInput):
+    def __init__(self):
+        VideoInput.__init__(self)
 
 
-  @nose.tools.with_setup(setup = setUp)
-  def test_close(self):
-    self.wtds.open("dummy_wtds_filename.txt") #buff_is_open is True
-    # now close it
-    self.wtds.close()
-    nose.tools.ok_(not self.wtds.buff_is_open, "buffer open after close() call")
+def __vital_algorithm_register__():
+    from kwiver.vital.algo import algorithm_factory
 
-  @nose.tools.with_setup(setup = setUp)
-  def test_write_set(self):
-    self.wtds.open("dummy_wtds_filename.txt")
-    track_descriptor_mock = Mock()
-    self.wtds.write_set([track_descriptor_mock])
-    track_descriptor_mock.method.assert_called_once_with()
+    # Register Algorithm
+    implementation_name = "SimpleVideoInput"
+    if algorithm_factory.has_algorithm_impl_name(
+        SimpleVideoInput.static_type_name(), implementation_name
+    ):
+        return
+
+    algorithm_factory.add_algorithm(
+        implementation_name, "test simple video input", SimpleVideoInput,
+    )
+    algorithm_factory.mark_algorithm_as_loaded(implementation_name)

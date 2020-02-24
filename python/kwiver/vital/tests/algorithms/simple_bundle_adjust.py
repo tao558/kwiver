@@ -38,7 +38,7 @@ from unittest.mock import Mock
 
 class SimpleBundleAdjust(CommonConfigurationMixin, BundleAdjust):
     """
-    Implementation of AssociateDetectionsToTrack to test it
+    Implementation of BundleAdjust to test it
 
     """
     def __init__(self):
@@ -76,6 +76,6 @@ def __vital_algorithm_register__():
                             implementation_name):
         return
     algorithm_factory.add_algorithm( implementation_name,
-                                "test simple associate detections to tracks",
+                                "test simple bundle adjust",
                                  SimpleBundleAdjust )
     algorithm_factory.mark_algorithm_as_loaded( implementation_name )

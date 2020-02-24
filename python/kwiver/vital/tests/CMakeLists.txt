@@ -6,8 +6,6 @@
 set(__testable_modnames
   test_algorithms_common
   test_algorithm_factory
-  test_associate_detections_to_tracks
-  test_bundle_adjust
   test_camera
   test_camera_intrinsics
   test_close_loops
@@ -33,8 +31,7 @@ set(__testable_modnames
   test_track
   test_track_set
   test_track_state
-  test_write_object_track_set
-  test_write_track_descriptor_set
+  test_transform_2d_io
   )
 
 # All python filenames_we in the vital.tests module

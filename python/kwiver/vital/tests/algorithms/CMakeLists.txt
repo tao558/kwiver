@@ -12,6 +12,7 @@ set(__test_algorithms
   simple_detect_motion
   simple_detected_object_filter
   simple_detected_object_set_input
+  simple_detected_object_set_output
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

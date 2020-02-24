@@ -12,7 +12,7 @@ class TestVitalTransform2DIO(TestCase):
 
     @nose.tools.raises(Exception)
     def test_load_nonexistant(self):
-        self.instance.load("Nonexistant_filename.txt")
+        self.instance.load("nonexistant_filename.txt")
 
     @nose.tools.raises(Exception)
     def test_load_directory(self):
@@ -21,12 +21,12 @@ class TestVitalTransform2DIO(TestCase):
 
     @nose.tools.raises(Exception)
     def test_save_nonexistant(self):
-        self.instance.save("Nonexistant_filename.txt")
+        self.instance.save("nonexistant_filename.txt")
 
     @nose.tools.raises(Exception)
     def test_save_directory(self):
         # Create a mock transform2d object
-        # save() requires this to be passed as an argument
+        # save() requires a second argument
         transform_2d_mock = Mock()
         with tempfile.TemporaryDirectory() as directory_name:
             self.instance.save(directory_name, transform_2d_mock)

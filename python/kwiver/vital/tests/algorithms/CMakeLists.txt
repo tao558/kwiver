@@ -9,6 +9,7 @@ set(__test_algorithms
   simple_compute_track_descriptors
   simple_convert_image
   simple_detect_features
+  simple_detect_motion
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

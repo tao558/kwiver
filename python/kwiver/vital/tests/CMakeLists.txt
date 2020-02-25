@@ -18,6 +18,7 @@ set(__testable_modnames
   test_descriptor_set
   test_eigen_numpy
   test_feature
+  test_feature_descriptor_io
   test_homography
   test_image
   test_image_container

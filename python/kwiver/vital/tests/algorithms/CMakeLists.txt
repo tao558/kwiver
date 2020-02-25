@@ -23,6 +23,7 @@ set(__test_algorithms
   simple_estimate_similarity_transform
   simple_extract_descriptors
   simple_filter_features
+  simple_filter_tracks
   simple_image_filter
   simple_image_object_detector
   simple_initialize_cameras_landmarks

@@ -26,6 +26,7 @@ set(__test_algorithms
   simple_filter_features
   simple_filter_tracks
   simple_image_filter
+  simple_image_io
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

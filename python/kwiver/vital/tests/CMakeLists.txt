@@ -22,6 +22,7 @@ set(__testable_modnames
   test_homography
   test_image
   test_image_container
+  test_image_io
   test_image_object_detector
   test_landmark
   test_object_track_state

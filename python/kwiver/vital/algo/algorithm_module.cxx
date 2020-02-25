@@ -67,6 +67,7 @@
 #include <python/kwiver/vital/algo/trampoline/feature_descriptor_io_trampoline.txx>
 #include <python/kwiver/vital/algo/trampoline/filter_features_trampoline.txx>
 #include <python/kwiver/vital/algo/trampoline/filter_tracks_trampoline.txx>
+#include <python/kwiver/vital/algo/trampoline/image_filter_trampoline.txx>
 #include <python/kwiver/vital/algo/trampoline/image_io_trampoline.txx>
 #include <python/kwiver/vital/algo/trampoline/image_object_detector_trampoline.txx>
 #include <python/kwiver/vital/algo/trampoline/initialize_cameras_landmarks_trampoline.txx>
@@ -118,6 +119,7 @@
 #include <python/kwiver/vital/algo/feature_descriptor_io.h>
 #include <python/kwiver/vital/algo/filter_features.h>
 #include <python/kwiver/vital/algo/filter_tracks.h>
+#include <python/kwiver/vital/algo/image_filter.h>
 #include <python/kwiver/vital/algo/image_io.h>
 #include <python/kwiver/vital/algo/image_object_detector.h>
 #include <python/kwiver/vital/algo/initialize_cameras_landmarks.h>
@@ -201,6 +203,8 @@ PYBIND11_MODULE(algorithm, m)
             algorithm_def_ff_trampoline<>>(m, "filter_features");
   register_algorithm<kwiver::vital::algo::filter_tracks,
             algorithm_def_ft_trampoline<>>(m, "filter_tracks");
+  register_algorithm<kwiver::vital::algo::image_filter,
+            algorithm_def_if_trampoline<>>(m, "image_filter");
   register_algorithm<kwiver::vital::algo::image_io,
             algorithm_def_iio_trampoline<>>(m, "image_io");
   register_algorithm<kwiver::vital::algo::image_object_detector,
@@ -277,6 +281,7 @@ PYBIND11_MODULE(algorithm, m)
   feature_descriptor_io(m);
   filter_features(m);
   filter_tracks(m);
+  image_filter(m);
   image_io(m);
   image_object_detector(m);
   initialize_cameras_landmarks(m);

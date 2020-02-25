@@ -42,13 +42,6 @@ class SimpleCloseLoops(CommonConfigurationMixin, CloseLoops):
     def __init__(self):
         CloseLoops.__init__(self)
 
-    def stich(self, frame_id, feature_track_set, image, mask):
-        frame_id.method()
-        feature_track_set.method()
-        image.method()
-        mask.method()
-        return feature_track_set
-
 
 def __vital_algorithm_register__():
     from kwiver.vital.algo import algorithm_factory

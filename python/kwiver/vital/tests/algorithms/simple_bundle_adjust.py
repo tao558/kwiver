@@ -44,29 +44,6 @@ class SimpleBundleAdjust(CommonConfigurationMixin, BundleAdjust):
     def __init__(self):
         BundleAdjust.__init__(self)
 
-    @multimethod
-    def optimize(self,
-                 cameras: CameraMap,
-                 landmarks: Mock,
-                 tracks: Mock,
-                 constraints: Mock):
-        landmarks.method()
-        tracks.method()
-        constraints.method()
-
-    @multimethod
-    def optimize(self,
-                cameras: CameraMap,
-                landmarks: Mock,
-                tracks: Mock,
-                fixed_cameras: list,
-                fixed_landmarks: Mock,
-                constraints: Mock,):
-        landmarks.method()
-        tracks.method()
-        fixed_landmarks.method()
-        constraints.method()
-
 def __vital_algorithm_register__():
     from kwiver.vital.algo import algorithm_factory
     # Register Algorithm

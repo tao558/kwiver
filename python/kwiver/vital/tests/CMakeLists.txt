@@ -8,7 +8,6 @@ set(__testable_modnames
   test_algorithm_factory
   test_camera
   test_camera_intrinsics
-  test_close_loops
   test_compute_association_matrix
   test_config
   test_camera_map

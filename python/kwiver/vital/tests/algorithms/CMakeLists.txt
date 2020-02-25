@@ -22,6 +22,7 @@ set(__test_algorithms
   simple_estimate_pnp
   simple_estimate_similarity_transform
   simple_extract_descriptors
+  simple_filter_features
   simple_image_filter
   simple_image_object_detector
   simple_initialize_cameras_landmarks

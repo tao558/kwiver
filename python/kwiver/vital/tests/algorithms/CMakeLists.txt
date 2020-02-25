@@ -19,6 +19,7 @@ set(__test_algorithms
   simple_estimate_fundamental_matrix
   simple_estimate_homography
   simple_estimate_pnp
+  simple_image_filter
   simple_image_object_detector
   simple_initialize_cameras_landmarks
   simple_initialize_object_tracks

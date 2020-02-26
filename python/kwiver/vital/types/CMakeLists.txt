@@ -3,13 +3,20 @@ project(vital_python_types)
 include_directories(${pybind11_INCLUDE_DIR})
 
 set( vital_python_headers
+     bounding_box.h
      image.h
      image_container.h
+     landmark.h
+     landmark_map.h
+     match_set.h
   )
 
 set( vital_python_sources
      image.cxx
      image_container.cxx
+     landmark.cxx
+     landmark_map.cxx
+     match_set.cxx
      types_module.cxx
    )
 

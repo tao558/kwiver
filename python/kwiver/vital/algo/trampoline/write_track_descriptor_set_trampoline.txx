@@ -97,7 +97,7 @@ class write_track_descriptor_set_trampoline :
 
 
 
-    void 
+    void
     write_set( const kwiver::vital::track_descriptor_set_sptr set ) override
     {
     	VITAL_PYBIND11_OVERLOAD_PURE(

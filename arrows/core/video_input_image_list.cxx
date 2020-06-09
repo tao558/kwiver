@@ -314,10 +314,10 @@ video_input_image_list
     ++d->m_current_file;
   }
 
-  ++d->m_frame_number;
-
   // Return timestamp
   ts = this->frame_timestamp();
+
+  ++d->m_frame_number;
 
   return ! this->end_of_video();
 }
@@ -333,12 +333,6 @@ video_input_image_list
   if (frame_number > static_cast<int>( d->m_files.size() ) || frame_number <= 0)
   {
     return false;
-  }
-
-  // Adjust frame number if this is the first call to seek_frame or next_frame
-  if (d->m_frame_number == 0)
-  {
-    d->m_frame_number = 1;
   }
 
   // Calculate distance to new frame

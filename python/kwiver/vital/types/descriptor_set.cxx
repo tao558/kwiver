@@ -28,6 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
 #include <vital/types/descriptor_set.h>

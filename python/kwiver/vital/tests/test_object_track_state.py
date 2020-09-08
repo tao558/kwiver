@@ -38,7 +38,7 @@ import unittest
 import nose.tools
 import numpy
 
-from kwiver.vital.types import ObjectTrackState, BoundingBox, ClassMap, \
+from kwiver.vital.types import ObjectTrackState, BoundingBoxD as BoundingBox, ClassMap, \
         DetectedObject
 
 

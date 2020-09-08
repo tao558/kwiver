@@ -28,8 +28,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef PY_BBOX_H
-#define PY_BBOX_H
 
 #include <string.h>
 #include <vital/types/bounding_box.h>
@@ -98,6 +96,7 @@ void bounding_box(py::module &m, const char * typestr)
   .def("width", &bbox::width)
   .def("height", &bbox::height)
   .def("area", &bbox::area)
+  .def("contains", &bbox::contains)
 
   .def("__nice__", [](bbox& self) -> std::string {
     auto locals = py::dict(py::arg("self")=self);
@@ -130,5 +129,9 @@ void bounding_box(py::module &m, const char * typestr)
   ;
 }
 
-
-#endif
+PYBIND11_MODULE(bounding_box, m)
+{
+  bounding_box<double>(m, "D");
+  bounding_box<float>(m, "F");
+  bounding_box<int>(m, "I");
+}

@@ -9,6 +9,7 @@ set(__testable_modnames
   test_activity
   test_algorithm_factory
   test_activity_type
+  test_bounding_box
   test_camera
   test_camera_intrinsics
   test_category_hierarchy

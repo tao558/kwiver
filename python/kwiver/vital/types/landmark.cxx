@@ -32,7 +32,6 @@
 
 #include <pybind11/pybind11.h>
 #include <pybind11/eigen.h>
-#include <python/kwiver/vital/types/landmark.h>
 
 
 std::shared_ptr<PyLandmarkBase>

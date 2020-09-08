@@ -29,8 +29,6 @@
  */
 
 #include <vital/types/landmark.h>
-#include <python/kwiver/vital/types/landmark.h>
-#include <python/kwiver/vital/types/landmark_map.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/embed.h>
 #include <pybind11/stl.h>

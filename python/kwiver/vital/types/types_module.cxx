@@ -35,24 +35,14 @@
  */
 
 #include <pybind11/pybind11.h>
-#include <python/kwiver/vital/types/bounding_box.h>
 #include <python/kwiver/vital/types/image.h>
 #include <python/kwiver/vital/types/image_container.h>
-#include <python/kwiver/vital/types/landmark.h>
-#include <python/kwiver/vital/types/landmark_map.h>
-#include <python/kwiver/vital/types/match_set.h>
 
 namespace py = pybind11;
 using namespace kwiver::vital::python;
 
 PYBIND11_MODULE(types, m)
 {
-  bounding_box<int>(m, "Int");
-  bounding_box<float>(m, "Float");
-  bounding_box<double>(m, "Double");
-  image(m);
-  image_container(m);
-  landmark(m);
-  landmark_map(m);
-  match_set(m);
+  image::image(m);
+  image_container::image_container(m);
 }

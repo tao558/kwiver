@@ -3,20 +3,13 @@ project(vital_python_types)
 include_directories(${pybind11_INCLUDE_DIR})
 
 set( vital_python_headers
-     bounding_box.h
      image.h
      image_container.h
-     landmark.h
-     landmark_map.h
-     match_set.h
   )
 
 set( vital_python_sources
      image.cxx
      image_container.cxx
-     landmark.cxx
-     landmark_map.cxx
-     match_set.cxx
      types_module.cxx
    )
 
@@ -256,12 +249,19 @@ target_link_libraries(python-vital.types-iqr_feedback
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(landmark
-  vital/types
-  landmark.cxx)
-target_link_libraries(python-vital.types-landmark
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(landmark
+#   vital/types
+#   landmark.cxx)
+# target_link_libraries(python-vital.types-landmark
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(landmark_map
+#   vital/types
+#   landmark_map.cxx)
+# target_link_libraries(python-vital.types-landmark_map
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
 kwiver_add_python_library(local_cartesian
   vital/types
@@ -274,6 +274,13 @@ kwiver_add_python_library(local_geo_cs
   vital/types
   local_geo_cs.cxx)
 target_link_libraries(python-vital.types-local_geo_cs
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
+
+kwiver_add_python_library(match_set
+  vital/types
+  match_set.cxx)
+target_link_libraries(python-vital.types-match_set
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -440,7 +447,8 @@ if(NOT SKBUILD)
     homography_f2f
     homography_f2w
     iqr_feedback
-    landmark
+    # landmark
+    # landmark_map
     local_cartesian
     rotation
     local_geo_cs

@@ -33,9 +33,16 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 #include <pybind11/embed.h>
-#include <python/kwiver/vital/types/match_set.h>
 
-void match_set(py::module &m) {
+namespace py = pybind11;
+
+typedef kwiver::vital::match match_t;
+typedef kwiver::vital::match_set match_set_t;
+typedef kwiver::vital::simple_match_set s_match_set_t;
+
+
+PYBIND11_MODULE(match_set, m)
+{
     py::bind_vector<std::vector<match_t>>(m, "MatchVector");
     py::class_<match_set_t, std::shared_ptr<match_set_t>>(m, "BaseMatchSet")
     .def("size", &match_set_t::size)

@@ -32,6 +32,8 @@ target_link_libraries(python-vital.types-activity
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+
+
 kwiver_add_python_library(bounding_box
   vital/types
   bounding_box.cxx)
@@ -95,12 +97,17 @@ target_link_libraries(python-vital.types-class_map
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(color
-  vital/types
-  color.cxx)
-target_link_libraries(python-vital.types-color
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(color
+#   vital/types
+#   color.cxx)
+# target_link_libraries(python-vital.types-color
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+autopybind11_add_module(color
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_input.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital )
 
 kwiver_add_python_library(covariance
   vital/types

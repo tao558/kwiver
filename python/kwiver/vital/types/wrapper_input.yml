@@ -1,0 +1,5 @@
+kwiver:
+  vital:
+    classes:
+      color:
+        file: [TODO_PATH_TO_KWIVER]/kwiver/vital/types/color.h

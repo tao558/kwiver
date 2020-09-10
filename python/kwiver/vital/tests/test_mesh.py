@@ -60,4 +60,8 @@ class TestMesh(unittest.TestCase):
     def test_bad_mesh(self):
         m = Mesh()
         nt.ok_(not m.is_init())
+        nt.assert_equal(m.num_verts(), 0)
+        nt.assert_equal(m.num_faces(), 0)
+        nt.assert_equal(m.num_edges(), 0)
+
         

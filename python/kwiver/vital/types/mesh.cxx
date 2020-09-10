@@ -40,6 +40,7 @@ PYBIND11_MODULE(mesh, m)
   py::class_<kwiver::vital::mesh,
              std::shared_ptr<kwiver::vital::mesh> >(m, "Mesh")
     .def(py::init<>())
+    .def("is_init",   &kwiver::vital::mesh::is_init)
     .def("num_verts", &kwiver::vital::mesh::num_verts)
     .def("num_faces", &kwiver::vital::mesh::num_faces)
     .def("num_edges", &kwiver::vital::mesh::num_edges)

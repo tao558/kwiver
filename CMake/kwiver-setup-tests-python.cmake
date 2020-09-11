@@ -25,13 +25,5 @@ if (NOSE_RUNNER)
                          ${mod_dst}
                          --with-xunit      
                          --xunit-file=nose_results.xml  )
-  # if (NOT CTEST_EXTRA_SUBMIT_FILES)
-  #   set(CTEST_EXTRA_SUBMIT_FILES "${CTEST_BINARY_DIRECTORY}/${timestamp or something}/nose_out.xml")
-  # else()
-  #   list(APPEND CTEST_EXTRA_SUBMIT_FILES 
-  #               "${CTEST_BINARY_DIRECTORY}/${timestamp or something}/nose_out.xml")
-  # endif()
-else ()
-  message (STATUS "nosetests not found, Python tests will not be run. 
-                  (To run install nosetests compatible with Python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR})")
+
 endif()

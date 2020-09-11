@@ -23,8 +23,6 @@ cache:
 before_script:
   - sudo apt-get install -y libproj-dev libgl1-mesa-dev libxt-dev libatlas-base-dev
   - bash .travis/install-deps.sh
-  - python -m pip || wget -qO- https://bootstrap.pypa.io/get-pip.py | python
-
 
 script:
   - export PATH=$HOME/deps/bin:$PATH

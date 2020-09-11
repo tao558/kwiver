@@ -210,7 +210,7 @@ mark_as_advanced(PYTHON_ABIFLAGS)
 # sets the python dependencies defiened in python/requirements.txt
 # to be a custom command of the python libraries target
 # the user flag is required when not executing inside a venv, we always pass it
-set(PIP_COMMAND "python" 
+set(PIP_COMMAND "${PYTHON_EXECUTABLE}" 
                 "-m" 
                 "pip" 
                 "install" 

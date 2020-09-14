@@ -106,14 +106,17 @@ if (KWIVER_ENABLE_TESTS)
 
   set(_test_data
         "data/airplane.ply")
+
+  include(kwiver-setup-tests-python)
   
   foreach (file_name IN LISTS _test_data)
 
-    kwiver_python_add_test_data(${file_name} ${mod_dst})
+    kwiver_python_add_test_data(${file_name} 
+                                ${kwiver_test_working_path})
 
   endforeach()
 
-  include(kwiver-setup-tests-python)
+  
   if (NOSE_RUNNER)
 
     kwiver_add_nosetests(py_vital_types)

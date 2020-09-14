@@ -20,7 +20,13 @@ if (NOSE_RUNNER)
     set(kwiver_test_output_path    "${KWIVER_BINARY_DIR}/tests/bin" )
 
   endif ()
-  set(kwiver_test_working_path    "${CTEST_BINARY_DIRECTORY}" )
+
+  if( CTEST_BINARY_DIRECTORY )
+    set(kwiver_test_working_path    "${CTEST_BINARY_DIRECTORY}")
+  else()
+    set(kwiver_test_working_path    "${CMAKE_BINARY_DIR}" )
+  endif()
+  
   set(kwiver_test_runner ${NOSE_RUNNER}
                          ${mod_dst}
                          --with-xunit      

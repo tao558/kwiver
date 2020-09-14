@@ -1,5 +1,6 @@
 kwiver:
   vital:
     classes:
-      color:
-        file: [TODO_PATH_TO_KWIVER]/kwiver/vital/types/color.h
+      rgb_color:
+        file: vital/types/color.h
+        cust_name: RGBColor

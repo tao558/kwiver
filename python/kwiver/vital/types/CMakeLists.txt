@@ -104,10 +104,20 @@ target_link_libraries(python-vital.types-class_map
 #   PUBLIC ${PYTHON_LIBRARIES}
 #          vital)
 
+find_package(AutoPyBind11)
 autopybind11_add_module(color
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/config.yml
                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-                        LINK_LIBRARIES vital )
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE )
+
+kwiver_add_python_library(color
+  vital/types
+  ${APB_GENERATED_FILES})
+target_link_libraries(python-vital.types-color
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
 
 kwiver_add_python_library(covariance
   vital/types

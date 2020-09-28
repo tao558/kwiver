@@ -1,4 +1,6 @@
 include(FetchContent)
+include("${KWIVER_CMAKE_DIR}/kwiver-setup-python.cmake")
+
 FetchContent_Declare(
     autopybind11
     GIT_REPOSITORY https://gitlab.kitware.com/autopybind11/autopybind11.git
@@ -13,7 +15,7 @@ find_package(AutoPyBind11)
 # AutoPyBind11 python scripts
 execute_process(
     COMMAND
-      ${Python_EXECUTABLE} -m pip install
+      ${PYTHON_EXECUTABLE} -m pip install
       ${autopybind11_SOURCE_DIR}
   )
 

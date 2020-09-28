@@ -3,4 +3,6 @@ kwiver:
     classes:
       rgb_color:
         file: vital/types/color.h
-        cust_name: RGBColor
+        customization:
+          name:
+            RGBColor

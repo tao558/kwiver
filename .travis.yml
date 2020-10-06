@@ -22,7 +22,7 @@ cache:
 
 before_script:
   - sudo apt-get install -y libproj-dev libgl1-mesa-dev libxt-dev libatlas-base-dev
-  - bash .travis/install-deps.sh
+  - travis_wait bash .travis/install-deps.sh
 
 script:
   - export PATH=$HOME/deps/bin:$PATH

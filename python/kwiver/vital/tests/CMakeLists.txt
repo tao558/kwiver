@@ -5,13 +5,13 @@
 # Define modules with tests in them
 set(__testable_modnames
   test_algorithm_factory
-  test_camera
+  # test_camera
   test_camera_intrinsics
   test_config
   test_camera_map
   test_color
   test_covariance
-  test_descriptor
+  # test_descriptor
   test_descriptor_set
   test_eigen_numpy
   test_feature
@@ -52,13 +52,11 @@ foreach (modname IN LISTS __all_modnames)
 endforeach()
 
 
-if (KWIVER_ENABLE_TESTS)
+if (KWIVER_ENABLE_TESTS AND NOSE_RUNNER)
 
   include(kwiver-setup-tests-python)
-  if (NOSE_RUNNER)
-
-    kwiver_add_nosetests(py_vital_types)
-
-  endif()
+    foreach (test IN LISTS __testable_modnames)
+      kwiver_add_nosetests(${test} vital-type-)
+    endforeach()
 
 endif()

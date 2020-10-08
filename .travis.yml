@@ -22,7 +22,8 @@ cache:
 
 before_script:
   - sudo apt-get install -y libproj-dev libgl1-mesa-dev libxt-dev libatlas-base-dev python3-venv
-  - travis_wait bash .travis/install-deps.sh
+  - bash .travis/install-deps.sh
+  - travis_wait bash .travis/update-cmake.sh
 
 script:
   - export PATH=$HOME/deps/bin:$PATH

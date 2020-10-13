@@ -61,10 +61,10 @@ void adder(metadata &self, py::object data, vital_metadata_tag t )
 
   default:
     // default to unknown tag type
-    { 
+    {
       auto vital_meta_data_ = data.cast< typename vital_meta_trait< VITAL_META_UNKNOWN >::type >();
-      self.add<VITAL_META_UNKNOWN>(vital_meta_data_ ); 
-      break; 
+      self.add<VITAL_META_UNKNOWN>(vital_meta_data_ );
+      break;
     }
   } // end switch
 

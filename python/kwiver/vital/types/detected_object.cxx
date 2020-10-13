@@ -154,7 +154,7 @@ det_obj_const_safe_set_mask(detected_object& self, image_container_sptr mask)
     else
     {
       auto ptr = std::make_shared<simple_image_container>(im);
-      self.set_mask(ptr); 
+      self.set_mask(ptr);
     }
   }
   else

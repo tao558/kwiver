@@ -207,7 +207,7 @@ mark_as_advanced(PYTHON_ABIFLAGS)
 ###
 # Python Dependencies
 #
-# sets the python dependencies defiened in python/requirements.txt
+# sets the python dependencies defined in python/requirements.txt
 # to be a custom command of the python libraries target
 # the user flag is required when not executing inside a venv, we always pass it
 set(PIP_COMMAND "${PYTHON_EXECUTABLE}" 
@@ -229,7 +229,7 @@ if (pip_install_result AND NOT pip_install_result EQUAL 0)
                     Error: ${pip_install_error}\n
                     Python Executable: ${PYTHON_EXECUTABLE}")
 else()
-  message (STATUS "pip install sucessfull")
+  message (STATUS "pip install successfull")
 endif()
 
 

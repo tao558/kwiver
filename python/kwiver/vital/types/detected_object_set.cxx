@@ -41,7 +41,7 @@ using detected_object_sptr = std::shared_ptr< kwiver::vital::detected_object >;
 using detected_object_scptr = std::shared_ptr< kwiver::vital::detected_object const >;
 
 class det_obj_set_trampoline : public kwiver::vital::detected_object_set{
-  
+
   using det_obj_set::det_obj_set;
   size_t size() const override;
   bool empty() const override;
@@ -55,7 +55,7 @@ size_t det_obj_set_trampoline::size() const
     size_t,
     det_obj_set,
     size,
-  );  
+  );
 }
 
 bool det_obj_set_trampoline::empty() const

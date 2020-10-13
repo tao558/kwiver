@@ -143,13 +143,13 @@ camera_intrinsics_trampoline
 ::clone() const
 {
   auto self = py::cast(this);
-  
+
   auto cloned = self.attr("clone")();
-  
+
   auto python_keep_alive = std::make_shared<py::object>(cloned);
-  
+
   auto ptr = cloned.cast<camera_intrinsics_trampoline*>();
-  
+
   return std::shared_ptr<kv::camera_intrinsics>(python_keep_alive, ptr);
 }
 

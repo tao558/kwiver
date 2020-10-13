@@ -40,7 +40,6 @@
 namespace py = pybind11;
 namespace kv = kwiver::vital;
 
-
 class camera_rpc_trampoline
   :public kv::camera_rpc
 {
@@ -68,7 +67,7 @@ class camera_rpc_publicist
 public:
 
   using kv::camera_rpc::jacobian;
-  
+
 };
 
 PYBIND11_MODULE( camera_rpc, m )
@@ -92,7 +91,7 @@ PYBIND11_MODULE( camera_rpc, m )
   .def( "project",      &kv::camera_rpc::project )
   .def( "back_project", &kv::camera_rpc::back_project )
   // manual use of the publisher here due to poor pybind pass by ref handling of eigen::matrix
-  .def( "jacobian",     [](kv::camera_rpc * self, const kv::vector_3d &pt, 
+  .def( "jacobian",     [](kv::camera_rpc * self, const kv::vector_3d &pt,
                             kv::matrix_2x2d &J, kv::vector_2d &norm_pt)
   {
     auto pub_grab = reinterpret_cast<camera_rpc_publicist*>(self);
@@ -121,14 +120,6 @@ PYBIND11_MODULE( camera_rpc, m )
   .def( "set_image_offset", &kv::simple_camera_rpc::set_image_offset )
   .def( "set_image_width",  &kv::simple_camera_rpc::set_image_width )
   .def( "set_image_height", &kv::simple_camera_rpc::set_image_height )
-  // .def( "jacobian", [](kv::simple_camera_rpc &self, const kv::vector_3d &pt, 
-  //                           kv::matrix_2x2d &J, kv::vector_2d &norm_pt)
-  // {
-  //   // auto jac_ref = camera_rpc_jac(self);
-  //   void (&jac_ref)() = &camera_rpc_jac::jacobian;
-  //   self.jac_ref(pt, J, norm_pt);
-  //   return std::make_tuple(J, norm_pt);
-  // })
   ;
 }
 
@@ -137,13 +128,13 @@ camera_rpc_trampoline
 ::clone() const
 {
   auto self = py::cast(this);
-  
+
   auto cloned = self.attr("clone")();
-  
+
   auto python_keep_alive = std::make_shared<py::object>(cloned);
-  
+
   auto ptr = cloned.cast<camera_rpc_trampoline*>();
-  
+
   return std::shared_ptr<kv::camera_rpc>(python_keep_alive, ptr);
 }
 

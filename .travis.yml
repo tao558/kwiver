@@ -63,3 +63,4 @@ script:
   - make install
   - . ./setup_KWIVER.sh
   - ctest
+  

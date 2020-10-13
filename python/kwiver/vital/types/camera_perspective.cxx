@@ -129,15 +129,15 @@ camera_perspective_trampoline
 ::clone() const
 {
 
-  
+
   auto self = py::cast(this);
-  
+
   auto cloned = self.attr("clone")();
-  
+
   auto python_keep_alive = std::make_shared<py::object>(cloned);
-  
+
   auto ptr = cloned.cast<camera_perspective_trampoline*>();
-  
+
   return std::shared_ptr<kv::camera_perspective>(python_keep_alive, ptr);
 }
 
@@ -148,13 +148,13 @@ camera_perspective_trampoline
   const kv::vector_3d &up_direction = kv::vector_3d::UnitZ() ) const
 {
   auto self = py::cast(this);
-  
+
   auto cloned = self.attr("clone_look_at")(stare_point,up_direction);
-  
+
   auto python_keep_alive = std::make_shared<py::object>(cloned);
-  
+
   auto ptr = cloned.cast<camera_perspective_trampoline*>();
-  
+
   return std::shared_ptr<kv::camera_perspective>(python_keep_alive, ptr);
 }
 

@@ -43,7 +43,6 @@ namespace kwiver {
 namespace vital  {
 namespace python {
 
-
 class camera_trampoline
   : public kv::camera
 {

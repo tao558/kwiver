@@ -211,7 +211,7 @@ mark_as_advanced(PYTHON_ABIFLAGS)
 # to be a custom command of the python libraries target
 # a venv will be created to encapsulate the pip installed dependencies
 # from the larger system, while still providing the tests access to their dependencies
-# 
+#
 
 if (KWIVER_ENABLE_TESTS)
 
@@ -220,7 +220,7 @@ if (KWIVER_ENABLE_TESTS)
   # locate the python3 install to gather info for venv creation
   find_package(Python3 COMPONENTS Interpreter)
   # determine if the package is conda
-  if(Python3_INTERPRETER_ID EQUAL "Anaconda")
+  if(Python3_INTERPRETER_ID STREQUAL "Anaconda")
     # conda venvs are managed by conda package manager
     # require conda specific command
     set(CONDA 1)
@@ -260,7 +260,7 @@ if (KWIVER_ENABLE_TESTS)
     unset( Python3_EXECUTABLE)
     find_package(Python3 COMPONENTS Interpreter Development)
     if( NOT Python3_FOUND)
-      message(WARNING 
+      message(WARNING
               "Could not find virtualenv Python interp.\
               Python tests may be run without garuntee of dependencies")
     else()
@@ -273,7 +273,7 @@ if (KWIVER_ENABLE_TESTS)
                       "-r"
                       "${KWIVER_SOURCE_DIR}/python/requirements.txt"
                       "||"
-                      "${CMAKE_COMMAND}" "-E" "echo" 
+                      "${CMAKE_COMMAND}" "-E" "echo"
                       "Pip install failed, consult build output. Python dependencies may not be met"
                       )
       message(STATUS "Test dependencies will be installed via pip to: ${VENV_DIR}")

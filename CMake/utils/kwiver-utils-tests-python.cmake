@@ -157,7 +157,7 @@ function (kwiver_add_nosetests name targ)
                                 '--xunit-file=nose_results.xml'"
               ${ARGN})
   endif()
-  
+
   set_tests_properties(test-python-${name}
     PROPERTIES
       FAIL_REGULAR_EXPRESSION "^Error: ;\nError: ")

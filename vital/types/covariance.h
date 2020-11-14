@@ -45,6 +45,8 @@
 namespace kwiver {
 namespace vital {
 
+
+
 /// A representation of covariance of a measurement
 template < unsigned N, typename T >
 class covariance_

@@ -1,0 +1,5 @@
+kwiver:
+  vital:
+    classes:
+      activity:
+        file: vital/types/activity.h

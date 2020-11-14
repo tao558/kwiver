@@ -23,16 +23,26 @@ target_link_libraries(python-vital.types-types
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(activity
+
+find_package(AutoPyBind11)
+
+autopybind11_add_module(activity_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/activity_wrapper_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/activity_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+get_target_property(activity_mod_srcs activity_mod_files SOURCES)
+
+kwiver_add_python_library(activity_mod
   vital/types
-  activity.cxx
+  ${activity_mod_srcs}
   )
 
-target_link_libraries(python-vital.types-activity
+target_link_libraries(python-vital.types-activity_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
-
-
 
 kwiver_add_python_library(bounding_box
   vital/types
@@ -97,29 +107,37 @@ target_link_libraries(python-vital.types-class_map
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-# kwiver_add_python_library(color
-#   vital/types
-#   color.cxx)
-# target_link_libraries(python-vital.types-color
-#   PUBLIC ${PYTHON_LIBRARIES}
-#          vital)
-
-find_package(AutoPyBind11)
-autopybind11_add_module(generated_color
-                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_input.yml
-                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/config.yml
-                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-                        LINK_LIBRARIES vital
-                        GEN_ONLY TRUE )
-
-get_target_property(generated_color_srcs generated_color SOURCES)
-
 kwiver_add_python_library(color
   vital/types
-  ${generated_color_srcs})
+  color.cxx)
 target_link_libraries(python-vital.types-color
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
+
+# autopybind11_add_module(color
+#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/color_wrapper_input.yml
+#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/color_config.yml
+#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+#                         LINK_LIBRARIES vital
+#                         GEN_ONLY TRUE )
+
+# get_target_property(color_srcs color_files SOURCES)
+
+# kwiver_add_python_library(color
+#   vital/types
+#   ${color_srcs})
+# target_link_libraries(python-vital.types-color
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+# autopybind11_add_module(covariance_mod
+#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/covariance_wrapper.yml
+#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/covar_config.yml
+#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+#                         LINK_LIBRARIES vital
+#                         GEN_ONLY TRUE
+#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+# get_target_property(covar_mod_srcs covariance_mod_files SOURCES)
+
 
 kwiver_add_python_library(covariance
   vital/types
@@ -324,6 +342,17 @@ target_link_libraries(python-vital.types-metadata_traits
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+
+
+# autopybind11_add_module(point_mod
+#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/point_wrapper_input.yml
+#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/point_config.yml
+#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+#                         LINK_LIBRARIES vital
+#                         GEN_ONLY TRUE
+#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+# get_target_property(point_mod_srcs point_mod_files SOURCES)
 kwiver_add_python_library(point
   vital/types
   point.cxx)
@@ -478,6 +507,6 @@ if(NOT SKBUILD)
     track_set
     uid
     object_track_set
-    activity
+    activity_mod
   )
 endif()

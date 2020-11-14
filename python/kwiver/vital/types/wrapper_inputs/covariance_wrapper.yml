@@ -1,0 +1,13 @@
+kwiver:
+  vital:
+    classes:
+      covariance_:
+        file: vital/types/covariance.h
+        inst:
+          - ["3", double]
+        customization:
+          name:
+          - covar3d
+          blacklist:
+            members: [data_size]
+            functions: []

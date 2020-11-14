@@ -1,0 +1,7 @@
+kwiver:
+  vital:
+    classes:
+      point:
+        file: vital/types/point.h
+        inst:
+          - ["2", double]

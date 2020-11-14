@@ -39,7 +39,7 @@ import unittest
 import nose.tools
 import numpy as np
 
-from kwiver.vital.types.covariance import *
+from kwiver.vital.types.covariance_ import *
 
 
 class TestVitalCovariance(unittest.TestCase):

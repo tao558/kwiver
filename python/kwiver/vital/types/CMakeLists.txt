@@ -44,17 +44,34 @@ target_link_libraries(python-vital.types-activity_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+autopybind11_add_module(bounding_box_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/bounding_box_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/bb_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+get_target_property(bbox_srcs bounding_box_mod_files SOURCES)
+
 kwiver_add_python_library(bounding_box
   vital/types
-  bounding_box.cxx)
+  ${bbox_srcs})
 target_link_libraries(python-vital.types-bounding_box
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(camera
+autopybind11_add_module(camera_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/camera_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/camera_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+get_target_property(camera_srcs camera_mod_files SOURCES)
+kwiver_add_python_library(camera_mod
   vital/types
-  camera.cxx)
-target_link_libraries(python-vital.types-camera
+  ${camera_srcs})
+target_link_libraries(python-vital.types-camera_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -72,12 +89,26 @@ target_link_libraries(python-vital.types-camera_map
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+set_target_properties(python-vital.types-camera_mod PROPERTIES "_indexes" ${CMAKE_CURRENT_BINARY_DIR}/camera_mod.mdx)
+file(GENERATE OUTPUT "python-vital-types-camera" CONTENT $<TARGET_PROPERTY:python-vital.types-camera_mod,SOURCES>)
+
+autopybind11_add_module(camera_perspective
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/camera_perspective_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/camera_perspective_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital python-vital.types-camera_mod
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+get_target_property(cam_perspective_srcs camera_perspective_files SOURCES)
+
 kwiver_add_python_library(camera_perspective
   vital/types
-  camera_perspective.cxx)
+  ${cam_perspective_srcs})
 target_link_libraries(python-vital.types-camera_perspective
   PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+         vital
+         )
+add_dependencies(python-vital.types-camera_perspective python-vital.types-camera_mod)
 
 kwiver_add_python_library(camera_perspective_map
   vital/types
@@ -107,42 +138,43 @@ target_link_libraries(python-vital.types-class_map
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(color
-  vital/types
-  color.cxx)
-target_link_libraries(python-vital.types-color
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-# autopybind11_add_module(color
-#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/color_wrapper_input.yml
-#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/color_config.yml
-#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-#                         LINK_LIBRARIES vital
-#                         GEN_ONLY TRUE )
-
-# get_target_property(color_srcs color_files SOURCES)
-
 # kwiver_add_python_library(color
 #   vital/types
-#   ${color_srcs})
+#   color.cxx)
 # target_link_libraries(python-vital.types-color
 #   PUBLIC ${PYTHON_LIBRARIES}
 #          vital)
-# autopybind11_add_module(covariance_mod
-#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/covariance_wrapper.yml
-#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/covar_config.yml
-#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-#                         LINK_LIBRARIES vital
-#                         GEN_ONLY TRUE
-#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
-# get_target_property(covar_mod_srcs covariance_mod_files SOURCES)
 
+autopybind11_add_module(color
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/color_wrapper_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/color_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
 
-kwiver_add_python_library(covariance
+get_target_property(color_srcs color_files SOURCES)
+
+kwiver_add_python_library(color
   vital/types
-  covariance.cxx)
-target_link_libraries(python-vital.types-covariance
+  ${color_srcs})
+target_link_libraries(python-vital.types-color
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
+autopybind11_add_module(covariance_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/covariance_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/covar_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+get_target_property(covar_mod_srcs covariance_mod_files SOURCES)
+
+
+kwiver_add_python_library(covariance_mod
+  vital/types
+  ${covar_mod_srcs})
+target_link_libraries(python-vital.types-covariance_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -344,19 +376,19 @@ target_link_libraries(python-vital.types-metadata_traits
 
 
 
-# autopybind11_add_module(point_mod
-#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/point_wrapper_input.yml
-#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/point_config.yml
-#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-#                         LINK_LIBRARIES vital
-#                         GEN_ONLY TRUE
-#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+autopybind11_add_module(point_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/point_wrapper_input.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/point_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
 
-# get_target_property(point_mod_srcs point_mod_files SOURCES)
-kwiver_add_python_library(point
+get_target_property(point_mod_srcs point_mod_files SOURCES)
+kwiver_add_python_library(point_mod
   vital/types
-  point.cxx)
-target_link_libraries(python-vital.types-point
+  ${point_mod_srcs})
+target_link_libraries(python-vital.types-point_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -464,7 +496,7 @@ if(NOT SKBUILD)
     camera_rpc
     class_map
     color
-    covariance
+    covariance_mod
     database_query
     descriptor
     descriptor_request
@@ -495,7 +527,7 @@ if(NOT SKBUILD)
     metadata_map
     metadata_tags
     metadata_traits
-    point
+    point_mod
     polygon
     query_result
     similarity

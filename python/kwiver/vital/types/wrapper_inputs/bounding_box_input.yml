@@ -1,0 +1,7 @@
+kwiver:
+  vital:
+    classes:
+      bounding_box:
+        file: vital/types/bounding_box.h
+        inst:
+          - int

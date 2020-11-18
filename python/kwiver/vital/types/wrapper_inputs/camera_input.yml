@@ -1,0 +1,7 @@
+kwiver:
+  vital:
+    classes:
+      camera:
+        file: vital/types/camera.h
+        # customization:
+        #   name: "camera"

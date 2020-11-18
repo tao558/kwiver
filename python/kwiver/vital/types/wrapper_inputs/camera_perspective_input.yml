@@ -1,0 +1,7 @@
+kwiver:
+  vital:
+    classes:
+      camera_perspective:
+        file: vital/types/camera_perspective.h
+        customization:
+          name: "CameraPerspective"

@@ -1,7 +1,19 @@
-kwiver:
-  vital:
-    classes:
-      bounding_box:
-        file: vital/types/bounding_box.h
-        inst:
-          - int
+files:
+  vital/types/bounding_box.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              bounding_box:
+                inst:
+                  - int
+
+
+# kwiver:
+#   vital:
+#     classes:
+#       bounding_box:
+#         file: vital/types/bounding_box.h
+#         inst:
+#           - int

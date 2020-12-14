@@ -1,0 +1,25 @@
+files:
+  vital/types/feature.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              feature:
+              feature_:
+                inst: [double, float]
+  vital/types/feature_set.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              feature_set:
+              simple_feature_set:
+  vital/types/feature_track_set.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              feature_track_set:

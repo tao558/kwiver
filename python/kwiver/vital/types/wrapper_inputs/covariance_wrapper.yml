@@ -1,13 +1,31 @@
-kwiver:
-  vital:
-    classes:
-      covariance_:
-        file: vital/types/covariance.h
-        inst:
-          - ["3", double]
-        customization:
-          name:
-          - covar3d
-          blacklist:
-            members: [data_size]
-            functions: []
+files:
+  vital/types/covariance.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              covariance_:
+                inst:
+                  - ["3", double]
+                  - ["2", double]
+                  - ["2", float]
+                customization:
+                  blacklist:
+                    members: [data_size]
+                    functions: []
+
+
+# kwiver:
+#   vital:
+#     classes:
+#       covariance_:
+#         file: vital/types/covariance.h
+#         inst:
+#           - ["3", double]
+#           - ["2", double]
+#           - ["2", float]
+#         customization:
+#           blacklist:
+#             members: [data_size]
+#             functions: []

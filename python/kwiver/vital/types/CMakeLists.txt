@@ -26,6 +26,7 @@ target_link_libraries(python-vital.types-types
 
 find_package(AutoPyBind11)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/activity_mod)
 autopybind11_add_module(activity_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/activity_wrapper_input.yml
                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/activity_config.yml
@@ -44,6 +45,8 @@ target_link_libraries(python-vital.types-activity_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bb_mod)
+
 autopybind11_add_module(bounding_box_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/bounding_box_input.yml
                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/bb_config.yml
@@ -53,13 +56,14 @@ autopybind11_add_module(bounding_box_mod
                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
 get_target_property(bbox_srcs bounding_box_mod_files SOURCES)
 
-kwiver_add_python_library(bounding_box
+kwiver_add_python_library(bounding_box_mod
   vital/types
   ${bbox_srcs})
-target_link_libraries(python-vital.types-bounding_box
+target_link_libraries(python-vital.types-bounding_box_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/cam_mod)
 autopybind11_add_module(camera_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/camera_input.yml
                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/camera_config.yml
@@ -75,54 +79,51 @@ target_link_libraries(python-vital.types-camera_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(camera_intrinsics
-  vital/types
-  camera_intrinsics.cxx)
-target_link_libraries(python-vital.types-camera_intrinsics
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(camera_intrinsics
+#   vital/types
+#   camera_intrinsics.cxx)
+# target_link_libraries(python-vital.types-camera_intrinsics
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-kwiver_add_python_library(camera_map
-  vital/types
-  camera_map.cxx)
-target_link_libraries(python-vital.types-camera_map
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(camera_map
+#   vital/types
+#   camera_map.cxx)
+# target_link_libraries(python-vital.types-camera_map
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-set_target_properties(python-vital.types-camera_mod PROPERTIES "_indexes" ${CMAKE_CURRENT_BINARY_DIR}/camera_mod.mdx)
-file(GENERATE OUTPUT "python-vital-types-camera" CONTENT $<TARGET_PROPERTY:python-vital.types-camera_mod,SOURCES>)
+# autopybind11_add_module(camera_perspective
+#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/camera_perspective_input.yml
+#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/camera_perspective_config.yml
+#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+#                         LINK_LIBRARIES vital python-vital.types-camera_mod
+#                         GEN_ONLY TRUE
+#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+# get_target_property(cam_perspective_srcs camera_perspective_files SOURCES)
 
-autopybind11_add_module(camera_perspective
-                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/camera_perspective_input.yml
-                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/camera_perspective_config.yml
-                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-                        LINK_LIBRARIES vital python-vital.types-camera_mod
-                        GEN_ONLY TRUE
-                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
-get_target_property(cam_perspective_srcs camera_perspective_files SOURCES)
+# kwiver_add_python_library(camera_perspective
+#   vital/types
+#   ${cam_perspective_srcs})
+# target_link_libraries(python-vital.types-camera_perspective
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital
+#          )
+# add_dependencies(python-vital.types-camera_perspective python-vital.types-camera_mod)
 
-kwiver_add_python_library(camera_perspective
-  vital/types
-  ${cam_perspective_srcs})
-target_link_libraries(python-vital.types-camera_perspective
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital
-         )
-add_dependencies(python-vital.types-camera_perspective python-vital.types-camera_mod)
+# kwiver_add_python_library(camera_perspective_map
+#   vital/types
+#   camera_perspective_map.cxx)
+# target_link_libraries(python-vital.types-camera_perspective_map
+#   PUBLIC ${PYTHON_LIBRARIES}
+#           vital)
 
-kwiver_add_python_library(camera_perspective_map
-  vital/types
-  camera_perspective_map.cxx)
-target_link_libraries(python-vital.types-camera_perspective_map
-  PUBLIC ${PYTHON_LIBRARIES}
-          vital)
-
-kwiver_add_python_library(camera_rpc
-  vital/types
-  camera_rpc.cxx)
-target_link_libraries(python-vital.types-camera_rpc
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(camera_rpc
+#   vital/types
+#   camera_rpc.cxx)
+# target_link_libraries(python-vital.types-camera_rpc
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
 kwiver_add_python_library(category_hierarchy
   vital/types
@@ -161,6 +162,8 @@ kwiver_add_python_library(color
 target_link_libraries(python-vital.types-color
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
+
+
 autopybind11_add_module(covariance_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/covariance_wrapper.yml
                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/covar_config.yml
@@ -178,33 +181,55 @@ target_link_libraries(python-vital.types-covariance_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(database_query
+autopybind11_add_module(database_query_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/database_query_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/database_query_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(database_query_mod_srcs database_query_mod_files SOURCES)
+
+kwiver_add_python_library(database_query_mod
   vital/types
-  database_query.cxx)
-target_link_libraries(python-vital.types-database_query
+  ${database_query_mod_srcs})
+target_link_libraries(python-vital.types-database_query_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(descriptor
+autopybind11_add_module(descriptor_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/descriptors_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/descriptors_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+
+get_target_property(descriptor_mod_srcs descriptor_mod_files SOURCES)
+
+
+kwiver_add_python_library(descriptor_mod
   vital/types
-  descriptor.cxx)
-target_link_libraries(python-vital.types-descriptor
+  ${descriptor_mod_srcs})
+target_link_libraries(python-vital.types-descriptor_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(descriptor_request
-  vital/types
-  descriptor_request.cxx)
-target_link_libraries(python-vital.types-descriptor_request
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(descriptor_request
+#   vital/types
+#   descriptor_request.cxx)
+# target_link_libraries(python-vital.types-descriptor_request
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-kwiver_add_python_library(descriptor_set
-  vital/types
-  descriptor_set.cxx)
-target_link_libraries(python-vital.types-descriptor_set
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(descriptor_set
+#   vital/types
+#   descriptor_set.cxx)
+# target_link_libraries(python-vital.types-descriptor_set
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
 kwiver_add_python_library(detected_object
   vital/types
@@ -220,89 +245,137 @@ target_link_libraries(python-vital.types-detected_object_set
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(feature
+autopybind11_add_module(feature_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/feature_mod_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/feature_mod_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(feature_mod_srcs feature_mod_files SOURCES)
+
+kwiver_add_python_library(feature_mod
   vital/types
-  feature.cxx)
-target_link_libraries(python-vital.types-feature
+  ${feature_mod_srcs})
+target_link_libraries(python-vital.types-feature_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(feature_set
+# kwiver_add_python_library(feature_set
+#   vital/types
+#   feature_set.cxx)
+# target_link_libraries(python-vital.types-feature_set
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(feature_track_set
+#   vital/types
+#   feature_track_set.cxx)
+# target_link_libraries(python-vital.types-feature_track_set
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+autopybind11_add_module(fundamental_matrix_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/fundamental_matrix_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/fundamental_matrix_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(fundamental_matrix_srcs fundamental_matrix_mod_files SOURCES)
+
+
+kwiver_add_python_library(fundamental_matrix_mod
   vital/types
-  feature_set.cxx)
-target_link_libraries(python-vital.types-feature_set
+  ${fundamental_matrix_srcs})
+target_link_libraries(python-vital.types-fundamental_matrix_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(feature_track_set
+autopybind11_add_module(geo_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/geo_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/geo_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(geo_mod_srcs geo_mod_files SOURCES)
+
+kwiver_add_python_library(geo_mod
   vital/types
-  feature_track_set.cxx)
-target_link_libraries(python-vital.types-feature_track_set
+  ${geo_mod_srcs})
+target_link_libraries(python-vital.types-geo_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(fundamental_matrix
+# kwiver_add_python_library(geodesy
+#   vital/types
+#   geodesy.cxx)
+# target_link_libraries(python-vital.types-geodesy
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(geo_MGRS
+#   vital/types
+#   geo_MGRS.cxx)
+# target_link_libraries(python-vital.types-geo_MGRS
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(geo_covariance
+#   vital/types
+#   geo_covariance.cxx)
+# target_link_libraries(python-vital.types-geo_covariance
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(geo_point
+#   vital/types
+#   geo_point.cxx)
+# target_link_libraries(python-vital.types-geo_point
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+# kwiver_add_python_library(geo_polygon
+#   vital/types
+#   geo_polygon.cxx)
+# target_link_libraries(python-vital.types-geo_polygon
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
+
+autopybind11_add_module(homography_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/homography_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/homography_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(homography_mod_srcs homography_mod_files SOURCES)
+
+kwiver_add_python_library(homography_mod
   vital/types
-  fundamental_matrix.cxx)
-target_link_libraries(python-vital.types-fundamental_matrix
+  ${homography_mod_srcs})
+target_link_libraries(python-vital.types-homography_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(geodesy
-  vital/types
-  geodesy.cxx)
-target_link_libraries(python-vital.types-geodesy
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(homography_f2f
+#   vital/types
+#   homography_f2f.cxx)
+# target_link_libraries(python-vital.types-homography_f2f
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-kwiver_add_python_library(geo_MGRS
-  vital/types
-  geo_MGRS.cxx)
-target_link_libraries(python-vital.types-geo_MGRS
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(geo_covariance
-  vital/types
-  geo_covariance.cxx)
-target_link_libraries(python-vital.types-geo_covariance
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(geo_point
-  vital/types
-  geo_point.cxx)
-target_link_libraries(python-vital.types-geo_point
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(geo_polygon
-  vital/types
-  geo_polygon.cxx)
-target_link_libraries(python-vital.types-geo_polygon
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(homography
-  vital/types
-  homography.cxx)
-target_link_libraries(python-vital.types-homography
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(homography_f2f
-  vital/types
-  homography_f2f.cxx)
-target_link_libraries(python-vital.types-homography_f2f
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(homography_f2w
-  vital/types
-  homography_f2w.cxx)
-target_link_libraries(python-vital.types-homography_f2w
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(homography_f2w
+#   vital/types
+#   homography_f2w.cxx)
+# target_link_libraries(python-vital.types-homography_f2w
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
 kwiver_add_python_library(iqr_feedback
   vital/types
@@ -374,7 +447,7 @@ target_link_libraries(python-vital.types-metadata_traits
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/point_mod)
 
 autopybind11_add_module(point_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/point_wrapper_input.yml
@@ -434,33 +507,44 @@ target_link_libraries(python-vital.types-timestamp
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
+autopybind11_add_module(track_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/track_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/track_mod_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(track_mod_srcs track_mod_files SOURCES)
+
 kwiver_add_python_library(track
   vital/types
-  track.cxx)
+  ${track_mod_srcs})
+
 target_link_libraries(python-vital.types-track
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(track_descriptor
-  vital/types
-  track_descriptor.cxx)
-target_link_libraries(python-vital.types-track_descriptor
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(track_descriptor
+#   vital/types
+#   track_descriptor.cxx)
+# target_link_libraries(python-vital.types-track_descriptor
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-kwiver_add_python_library(track_interval
-  vital/types
-  track_interval.cxx)
-target_link_libraries(python-vital.types-track_interval
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(track_interval
+#   vital/types
+#   track_interval.cxx)
+# target_link_libraries(python-vital.types-track_interval
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
-kwiver_add_python_library(track_set
-  vital/types
-  track_set.cxx)
-target_link_libraries(python-vital.types-track_set
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
+# kwiver_add_python_library(track_set
+#   vital/types
+#   track_set.cxx)
+# target_link_libraries(python-vital.types-track_set
+#   PUBLIC ${PYTHON_LIBRARIES}
+#          vital)
 
 kwiver_add_python_library(transform_2d
   vital/types
@@ -486,36 +570,32 @@ target_link_libraries(python-vital.types-object_track_set
 if(NOT SKBUILD)
   kwiver_create_python_init(vital/types
     types
-    bounding_box
+    bounding_box_mod
     category_hierarchy
-    camera
-    camera_intrinsics
-    camera_map
-    camera_perspective
-    camera_perspective_map
-    camera_rpc
+    camera_mod
     class_map
     color
     covariance_mod
-    database_query
-    descriptor
-    descriptor_request
-    descriptor_set
-    detected_object
+    database_query_mod
+    descriptor_mod
+    # descriptor_request
+    # descriptor_set
+    # detected_object
     detected_object_set
-    feature
-    feature_set
-    feature_track_set
-    fundamental_matrix
-    geodesy
-    geo_covariance
-    geo_MGRS
-    geo_polygon
-    geo_point
+    feature_mod
+    # feature_set
+    # feature_track_set
+    fundamental_matrix_mod
+    geo_mod
+    # geodesy
+    # geo_covariance
+    # geo_MGRS
+    # geo_polygon
+    # geo_point
     transform_2d
-    homography
-    homography_f2f
-    homography_f2w
+    homography_mod
+    # homography_f2f
+    # homography_f2w
     iqr_feedback
     # landmark
     # landmark_map
@@ -533,10 +613,10 @@ if(NOT SKBUILD)
     similarity
     sfm_constraints
     timestamp
-    track
-    track_descriptor
-    track_interval
-    track_set
+    track_mod
+    # track_descriptor
+    # track_interval
+    # track_set
     uid
     object_track_set
     activity_mod

@@ -1,8 +1,22 @@
-kwiver:
-  vital:
-    classes:
-      rgb_color:
-        file: vital/types/color.h
-        customization:
-          name:
-            RGBColor
+files:
+  vital/types/color.h:
+    namespaces:
+      kwiver:
+        namepsaces:
+          vital:
+            classes:
+              rgb_color:
+                customization:
+                  name:
+                    RGBColor
+
+
+
+# kwiver:
+#   vital:
+#     classes:
+#       rgb_color:
+#         file: vital/types/color.h
+#         customization:
+#           name:
+#             RGBColor

@@ -1,5 +1,14 @@
-kwiver:
-  vital:
-    classes:
-      activity:
-        file: vital/types/activity.h
+files:
+  vital/types/activity.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              activity:
+
+# kwiver:
+#   vital:
+#     classes:
+#       activity:
+#         file: vital/types/activity.h

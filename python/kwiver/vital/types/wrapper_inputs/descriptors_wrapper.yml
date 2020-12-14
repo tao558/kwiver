@@ -1,0 +1,29 @@
+files:
+  vital/types/descriptor.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              descriptor:
+              descriptor_array_of:
+                inst: [float, double]
+              descriptor_dynamic:
+                inst: [float, double]
+                customization:
+                  name: [DescriptorF, DescriptorD]
+  vital/types/descriptor_set.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              descriptor_set:
+              simple_descriptor_set:
+  vital/types/descriptor_request.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              descriptor_request:

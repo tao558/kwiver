@@ -1,7 +1,19 @@
-kwiver:
-  vital:
-    classes:
-      point:
-        file: vital/types/point.h
-        inst:
-          - ["2", double]
+files:
+  vital/types/point.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              point:
+                inst:
+                  - ["2", double]
+
+
+# kwiver:
+#   vital:
+#     classes:
+#       point:
+#         file: vital/types/point.h
+#         inst:
+#           - ["2", double]

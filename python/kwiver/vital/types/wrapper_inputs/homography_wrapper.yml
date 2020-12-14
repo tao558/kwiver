@@ -1,0 +1,24 @@
+files:
+  vital/types/homography.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              homography:
+              homography_:
+                inst: [double, float]
+  vital/types/homography_f2f.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              f2f_homography:
+  vital/types/homography_f2w.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              f2w_homography:

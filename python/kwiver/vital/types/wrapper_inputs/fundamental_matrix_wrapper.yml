@@ -1,0 +1,10 @@
+files:
+  vital/types/fundamental_matrix.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              fundamental_matrix:
+              fundamental_matrix_:
+                inst: [double, float]

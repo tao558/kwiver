@@ -2,17 +2,17 @@ from __future__ import absolute_import
 
 from kwiver.vital.types.types import *
 from kwiver.vital.types.activity_types import *
-from kwiver.vital.types.bounding_box import *
-from kwiver.vital.types.camera import *
+from kwiver.vital.types.bounding_box_mod import *
+from kwiver.vital.types.camera_mod import *
 from kwiver.vital.types.camera_intrinsics import *
 from kwiver.vital.types.camera_map import *
-from kwiver.vital.types.camera_perspective import *
+# from kwiver.vital.types.camera_perspective import *
 from kwiver.vital.types.camera_perspective_map import *
-from kwiver.vital.types.camera_rpc import *
+# from kwiver.vital.types.camera_rpc import *
 from kwiver.vital.types.category_hierarchy import *
 from kwiver.vital.types.class_map import *
 from kwiver.vital.types.color import *
-from kwiver.vital.types.covariance import *
+from kwiver.vital.types.covariance_mod import *
 from kwiver.vital.types.database_query import *
 from kwiver.vital.types.descriptor import *
 from kwiver.vital.types.descriptor_request import *
@@ -45,7 +45,7 @@ from kwiver.vital.types.metadata_map import *
 from kwiver.vital.types.metadata_tags import *
 from kwiver.vital.types.metadata_traits import *
 from kwiver.vital.types.object_track_set import *
-from kwiver.vital.types.point import *
+from kwiver.vital.types.point_mod import *
 from kwiver.vital.types.polygon import *
 from kwiver.vital.types.query_result import *
 from kwiver.vital.types.similarity import *

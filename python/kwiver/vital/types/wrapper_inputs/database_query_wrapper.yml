@@ -1,0 +1,14 @@
+files:
+  vital/types/database_query.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              database_query:
+                customization:
+                  blacklist:
+                    members: []
+                    functions: [descriptors, set_descriptors]
+            enums:
+              query_filter:

@@ -26,5 +26,5 @@ There is a currently established method for implementing templating, and example
 great example of this.
 
 
-Additionally, a unit test must be added or if appropriate, extended, for each added module/class/component added to the bindings
+Additionally, a unit test must be added or if appropriate, extended, for each added module/class/component added to the bindings.
 The tests are typically divided by python module at the file level.

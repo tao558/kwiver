@@ -1,0 +1,8 @@
+files:
+  vital/algo/algorithm.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              algorithm:

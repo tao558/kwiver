@@ -1,0 +1,8 @@
+files:
+  vital/types/category_hierarchy.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              category_hierarchy:

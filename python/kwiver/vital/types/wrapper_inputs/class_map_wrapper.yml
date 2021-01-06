@@ -1,0 +1,8 @@
+files:
+  vital/types/class_map.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              class_map:

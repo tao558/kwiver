@@ -23,9 +23,6 @@ target_link_libraries(python-vital.types-types
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-
-find_package(AutoPyBind11)
-
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/activity_mod)
 autopybind11_add_module(activity_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/activity_wrapper_input.yml
@@ -125,17 +122,37 @@ target_link_libraries(python-vital.types-camera_mod
 #   PUBLIC ${PYTHON_LIBRARIES}
 #          vital)
 
-kwiver_add_python_library(category_hierarchy
+autopybind11_add_module(category_hierarchy_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/category_hierarchy.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/category_hierarchy_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(category_hierarchy_mod_srcs category_hierarchy_mod_files SOURCES)
+
+kwiver_add_python_library(category_hierarchy_mod
   vital/types
-  category_hierarchy.cxx)
-target_link_libraries(python-vital.types-category_hierarchy
+  ${category_hierarchy_mod_srcs})
+target_link_libraries(python-vital.types-category_hierarchy_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(class_map
+autopybind11_add_module(class_map_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}wrapper_inputs/class_map_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/class_map_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(class_map_mod_srcs class_map_mod_files SOURCES)
+
+kwiver_add_python_library(class_map_mod
   vital/types
-  class_map.cxx)
-target_link_libraries(python-vital.types-class_map
+  ${class_map_mod_srcs})
+target_link_libraries(python-vital.types-class_map_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -198,52 +215,62 @@ target_link_libraries(python-vital.types-database_query_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-autopybind11_add_module(descriptor_mod
-                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/descriptors_wrapper.yml
-                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/descriptors_conf.yml
+# autopybind11_add_module(descriptor_mod
+#                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/descriptors_wrapper.yml
+#                         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/descriptors_conf.yml
+#                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+#                         LINK_LIBRARIES vital
+#                         GEN_ONLY TRUE
+#                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+
+# get_target_property(descriptor_mod_srcs descriptor_mod_files SOURCES)
+
+
+kwiver_add_python_library(descriptor
+  vital/types
+  descriptor.cxx)
+target_link_libraries(python-vital.types-descriptor
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
+
+kwiver_add_python_library(descriptor_request
+  vital/types
+  descriptor_request.cxx)
+target_link_libraries(python-vital.types-descriptor_request
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
+
+kwiver_add_python_library(descriptor_set
+  vital/types
+  descriptor_set.cxx)
+target_link_libraries(python-vital.types-descriptor_set
+  PUBLIC ${PYTHON_LIBRARIES}
+         vital)
+
+autopybind11_add_module(detected_object_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/detected_object_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/detected_object_conf.yml
                         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
                         LINK_LIBRARIES vital
                         GEN_ONLY TRUE
                         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
 
+get_target_property(detected_object_mod_srcs detected_object_mod_files SOURCES)
 
-get_target_property(descriptor_mod_srcs descriptor_mod_files SOURCES)
-
-
-kwiver_add_python_library(descriptor_mod
+kwiver_add_python_library(detected_object_mod
   vital/types
-  ${descriptor_mod_srcs})
-target_link_libraries(python-vital.types-descriptor_mod
+  ${detected_object_mod_srcs})
+target_link_libraries(python-vital.types-detected_object_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-# kwiver_add_python_library(descriptor_request
+# kwiver_add_python_library(detected_object_set
 #   vital/types
-#   descriptor_request.cxx)
-# target_link_libraries(python-vital.types-descriptor_request
+#   detected_object_set.cxx)
+# target_link_libraries(python-vital.types-detected_object_set
 #   PUBLIC ${PYTHON_LIBRARIES}
 #          vital)
-
-# kwiver_add_python_library(descriptor_set
-#   vital/types
-#   descriptor_set.cxx)
-# target_link_libraries(python-vital.types-descriptor_set
-#   PUBLIC ${PYTHON_LIBRARIES}
-#          vital)
-
-kwiver_add_python_library(detected_object
-  vital/types
-  detected_object.cxx)
-target_link_libraries(python-vital.types-detected_object
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
-
-kwiver_add_python_library(detected_object_set
-  vital/types
-  detected_object_set.cxx)
-target_link_libraries(python-vital.types-detected_object_set
-  PUBLIC ${PYTHON_LIBRARIES}
-         vital)
 
 autopybind11_add_module(feature_mod
                         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/feature_mod_wrapper.yml
@@ -465,45 +492,105 @@ target_link_libraries(python-vital.types-point_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(polygon
+autopybind11_add_module(polygon_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/polygon_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/polygon_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+get_target_property(polygon_mod_srcs polygon_mod_files SOURCES)
+
+kwiver_add_python_library(polygon_mod
   vital/types
-  polygon.cxx)
-target_link_libraries(python-vital.types-polygon
+  ${polygon_mod_srcs})
+target_link_libraries(python-vital.types-polygon_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(query_result
+autopybind11_add_module(query_result_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/query_reseult_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/query_result_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+get_target_property(query_result_mod_srcs query_result_mod_files SOURCES)
+
+kwiver_add_python_library(query_result_mod
   vital/types
-  query_result.cxx)
-target_link_libraries(python-vital.types-query_result
+  ${query_result_mod_srcs})
+target_link_libraries(python-vital.types-query_result_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(rotation
+autopybind11_add_module(rotation_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/rotation_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/rotation_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(rotation_mod_srcs rotation_mod_files SOURCES)
+
+kwiver_add_python_library(rotation_mod
   vital/types
-  rotation.cxx)
-target_link_libraries(python-vital.types-rotation
+  ${rotation_mod_srcs})
+target_link_libraries(python-vital.types-rotation_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(similarity
+autopybind11_add_module(similarity_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/similarity_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/similarity_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(similarity_mod_srcs similarity_mod_files SOURCES)
+
+kwiver_add_python_library(similarity_mod
   vital/types
-  similarity.cxx)
-target_link_libraries(python-vital.types-similarity
+  ${similarity_mod_srcs})
+target_link_libraries(python-vital.types-similarity_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(sfm_constraints
+autopybind11_add_module(sfm_constraints_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/sfm_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/sfm_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(sfm_constraints_mod_srcs sfm_constraints_mod_files SOURCES)
+
+kwiver_add_python_library(sfm_constraints_mod
   vital/types
-  sfm_constraints.cxx)
-target_link_libraries(python-vital.types-sfm_constraints
+  ${sfm_constraints_mod_srcs})
+target_link_libraries(python-vital.types-sfm_constraints_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(timestamp
+autopybind11_add_module(timestamp_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/timestamp_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/timestamp_config.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+
+get_target_property(timestamp_mod_srcs timestamp_mod_files SOURCES)
+
+kwiver_add_python_library(timestamp_mod
   vital/types
-  timestamp.cxx)
-target_link_libraries(python-vital.types-timestamp
+  ${timestamp_mod_srcs})
+target_link_libraries(python-vital.types-timestamp_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
@@ -546,24 +633,54 @@ target_link_libraries(python-vital.types-track
 #   PUBLIC ${PYTHON_LIBRARIES}
 #          vital)
 
-kwiver_add_python_library(transform_2d
+autopybind11_add_module(transform_2d_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/transform_2d_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/transform_2d_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital
+                        GEN_ONLY TRUE
+                        INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+get_target_property(transform_2d_mod_srcs transform_2d_mod_files SOURCES)
+
+kwiver_add_python_library(transform_2d_mod
   vital/types
-  transform_2d.cxx)
-target_link_libraries(python-vital.types-transform_2d
+  ${transform_2d_mod_srcs})
+target_link_libraries(python-vital.types-transform_2d_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(uid
+autopybind11_add_module(uid_mod
+         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/uid_wrapper.yml
+         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/uid_conf.yml
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+         LINK_LIBRARIES vital
+         GEN_ONLY TRUE
+         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+get_target_property(uid_mod_srcs uid_mod_files SOURCES)
+
+kwiver_add_python_library(uid_mod
   vital/types
-  uid.cxx)
-target_link_libraries(python-vital.types-uid
+  ${uid_mod_srcs})
+target_link_libraries(python-vital.types-uid_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 
-kwiver_add_python_library(object_track_set
+autopybind11_add_module(object_track_set_mod
+         YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrapper_inputs/object_track_set_wrapper.yml
+         CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/object_track_set_conf.yml
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+         LINK_LIBRARIES vital
+         GEN_ONLY TRUE
+         INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR} )
+
+get_target_property(object_track_set_mod_srcs object_track_set_mod_files SOURCES)
+
+kwiver_add_python_library(object_track_set_mod
   vital/types
-  object_track_set.cxx)
-target_link_libraries(python-vital.types-object_track_set
+  ${object_track_set_mod_srcs})
+target_link_libraries(python-vital.types-object_track_set_mod
   PUBLIC ${PYTHON_LIBRARIES}
          vital)
 

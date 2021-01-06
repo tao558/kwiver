@@ -1,0 +1,8 @@
+files:
+  vital/types/uid.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              uid:

@@ -1,0 +1,15 @@
+files:
+  vital/types/similarity.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              similarity_:
+                inst:
+                  - float
+                  - double
+                customization:
+                  names:
+                    - similarityF
+                    - similarityD

@@ -1,0 +1,8 @@
+files:
+  vital/types/transform_2d.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              transform_2d:

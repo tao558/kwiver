@@ -1,0 +1,15 @@
+files:
+  vital/types/detected_object.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              detected_object:
+  vital/types/detected_object_set.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              detected_object_set:

@@ -41,30 +41,3 @@ files:
             classes:
               camera_intrinsics:
               simple_camera_intrinsics:
-# kwiver:
-#   vital:
-#     classes:
-#       camera:
-#         file: vital/types/camera.h
-#       camera_perspective:
-#         file: vital/types/camera_perspective.h
-#       camera_rpc:
-#         file: vital/types/camera_rpc.h
-#       simple_camera_rpc:
-#         file: vital/types/camera_rpc.h
-#       camera_map_of_:
-#         file: vital/types/camera_map.h
-#         inst: [kwiver::vital::camera_perspective]
-#         customization:
-#           name: [cameraPerspectiveMap]
-#       camera_intrinsics:
-#         file: vital/types/camera_intrinsics.h
-#       simple_camera_intrinsics:
-#         file: vital/types/camera_intrinsics.h
-#       camera_map:
-#         file: vital/types/camera_map.h
-#       simple_camera_map:
-#         file: vital/types/camera_map.h
-
-
-

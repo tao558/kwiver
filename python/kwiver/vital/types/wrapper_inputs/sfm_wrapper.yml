@@ -1,0 +1,8 @@
+files:
+  vital/types/sfm_constraints.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              sfm_constraints:

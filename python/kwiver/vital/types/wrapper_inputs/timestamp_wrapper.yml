@@ -1,0 +1,8 @@
+files:
+  vital/types/timestamp.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              timestamp:

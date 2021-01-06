@@ -63,6 +63,12 @@ kwiver_add_python_library(algorithm
   trampoline/image_object_detector_trampoline.txx
 )
 
+autopybind11_add_module(algo_mod
+                        YAML_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/wrappers/algo_mod_wrapper.yml
+                        CONFIG_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/configs/algo_mod_conf.yml
+                        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+                        LINK_LIBRARIES vital vital_algo vital_config vital_python_util
+                      )
 
 target_link_libraries(python-vital.algo-algorithm
   PUBLIC ${PYTHON_LIBRARIES}

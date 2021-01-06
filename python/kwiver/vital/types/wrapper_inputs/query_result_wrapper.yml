@@ -1,0 +1,8 @@
+files:
+  vital/types/query_result.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              query_result:

@@ -1,0 +1,13 @@
+files:
+  vital/types/rotation.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              rotation_:
+                inst:
+                  - float
+                  - double
+                customization:
+                  custom_name: 'lambda x: "Rotation" + x[0]'

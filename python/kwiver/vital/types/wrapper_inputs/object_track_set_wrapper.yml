@@ -1,0 +1,9 @@
+files:
+  vital/types/object_track_set.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              object_track_state:
+              object_track_set:

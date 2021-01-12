@@ -1,0 +1,8 @@
+files:
+  vital/types/iqr_feedback.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              iqr_feedback:

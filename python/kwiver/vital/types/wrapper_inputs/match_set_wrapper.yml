@@ -1,0 +1,9 @@
+files:
+  vital/types/match_set.h:
+    namespaces:
+      kwiver:
+        namepsaces:
+          vital:
+            classes:
+              match_set:
+              simple_match_set:

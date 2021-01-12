@@ -1,0 +1,8 @@
+files:
+  vital/types/local_geo_cs.h:
+    namespaces:
+      kwiver:
+        namespaces:
+          vital:
+            classes:
+              local_geo_cs:
